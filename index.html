@@ -1544,7 +1544,7 @@
             const formData = new FormData();
             formData.append("model", fileInput.files[0]);
 
-            fetch("http://127.0.0.1:5000/upload-model", {
+            fetch("https://website-danantara-production.up.railway.app/upload-model", {
                 method: "POST",
                 body: formData
             })
