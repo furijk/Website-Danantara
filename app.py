@@ -5,6 +5,10 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/")
+def home():
+    return "API is running"
+
 @app.route("/upload-model", methods=["POST"])
 def upload_model():
     if "model" not in request.files:
