@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>Danantara - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Dashboard Title - Centered -->
+                    <div class="d-flex align-items-center justify-content-center w-100">
+                        <h1 class="h3 mb-0 text-gray-800 dashboard-title">Dashboard Analisis Sentimen</h1>
+                    </div>
+
+                    <!-- Upload button in Topbar -->
+                    <ul class="navbar-nav ml-auto align-items-center">
+                        <li class="nav-item">
+                            <input type="file" id="fileInput" accept=".csv,application/json" style="display:none">
+                            <label for="fileInput"
+                            class="btn btn-sm d-flex align-items-center justify-content-center"
+                            style="
+                            cursor: pointer;
+                            background: linear-gradient(135deg, #4e73df, #365ace);
+                            color: white;
+                            padding: 8px 25px;
+                            font-size: .85rem;
+                            font-weight: 700;
+                            border-radius: 10px;
+                            box-shadow: 0 2px 6px rgba(78,115,223,0.3);
+                            white-space: nowrap;
+                            ">
+                                <i class="fas fa-upload fa-sm mr-2"></i> Upload Data
+                            </label>
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <!-- Title and button moved to Topbar -->
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row align-items-stretch">
+
+                        <!-- Card Jumlah Data -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2 clickable-card" data-href="tables.html" data-filter="tables" tabindex="0" role="button">
+                                <div class="card-body position-relative">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Jumlah Data</div>
+                                            <div class="d-flex align-items-center stat-card">
+                                                <div class="stat-icon primary"><i class="fas fa-database"></i></div>
+                                                <div>
+                                                    <div class="stat-value text-gray-800"><span id="totalCount">-</span></div>
+                                                    <div class="stat-sub">Jumlah data positif dan negatif</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card Positif -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2 clickable-card" data-href="positif.html" data-filter="positif" tabindex="0" role="button" aria-label="Lihat detail Positif">
+                                <div class="card-body position-relative">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Positif</div>
+                                            <div class="d-flex align-items-center stat-card">
+                                                <div class="stat-icon success"><i class="fas fa-smile"></i></div>
+                                                <div>
+                                                    <div class="stat-value text-gray-800">
+                                                        <span id="positifCount">-</span>
+                                                    </div>
+                                                    <div class="stat-sub">Jumlah data positif</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Negatif -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-danger shadow h-100 py-2 clickable-card" data-href="negatif.html" tabindex="0" role="button" aria-label="Lihat detail Negatif">
+                                <div class="card-body position-relative">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Negatif</div>
+                                            <div class="d-flex align-items-center stat-card">
+                                                <div class="stat-icon danger"><i class="fas fa-frown"></i></div>
+                                                <div>
+                                                    <div class="stat-value text-gray-800">
+                                                        <span id="negatifCount">-</span>
+                                                    </div>
+                                                    <div class="stat-sub">Jumlah data negatif</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Prediksi Sentimen -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2 clickable-card" data-href="prediksi.html" data-filter="prediksi" tabindex="0" role="button">
+                                <div class="card-body position-relative">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Prediksi Sentimen</div>
+                                            <div class="d-flex align-items-center stat-card">
+                                                <div class="stat-icon info"><i class="fas fa-robot"></i></div>
+                                                <div>
+                                                    <div class="stat-value text-gray-800"><span id="prediksiCount">-</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Content Row -->
+
+                    <div class="row align-items-stretch">
+
+                        <!-- Bar Chart -->
+                        <div class="col-xl-6 col-lg-6 d-flex">
+                            <div class="card shadow mb-4 w-100 confusion-card">
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <h6 class="m-0 font-weight-bold text-primary mb-1">Distribusi Sentimen</h6>
+                                    <div class="confusion-subtitle mb-3">
+                                    Visualisasi perbandingan jumlah data positif dan negatif
+                                    </div>
+                                    <!-- Summary bar above line chart (combined) -->
+                                    <div class="mb-4 text-center small">
+                                        <div class="dist-summary" style="max-width:760px; margin:0 auto;">
+                                            <div style="text-align:center; min-width:130px;">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase" style="font-size:0.7rem;">Positif</div>
+                                                <div class="h4 font-weight-bold text-gray-800" id="distPosCount">-</div>
+                                            </div>
+                                            <div style="display:flex; align-items:center;">
+                                                <span id="distPosPercent" class="percent-pill pos">0%</span>
+                                            </div>
+                                            <div style="width:1px; height:56px; background:rgba(0,0,0,0.06);"></div>
+                                            <div style="text-align:center; min-width:130px;">
+                                                <div class="text-xs font-weight-bold text-danger text-uppercase" style="font-size:0.7rem;">Negatif</div>
+                                                <div class="h4 font-weight-bold text-gray-800" id="distNegCount">-</div>
+                                            </div>
+                                            <div style="display:flex; align-items:center;">
+                                                <span id="distNegPercent" class="percent-pill neg">0%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="chart-bar">
+                                        <canvas id="myBarChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Confusion Matrix -->
+                        <div class="col-xl-6 col-lg-6 d-flex">
+                            <div class="card shadow mb-4 confusion-card w-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-1">
+                                        <div>
+                                            <h6 class="m-0 font-weight-bold text-primary mb-1">Confusion Matrix</h6>
+                                            <div class="confusion-subtitle">
+                                            Evaluasi performa model klasifikasi sentimen
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-sm d-flex align-items-center justify-content-center"
+                                            onclick="document.getElementById('modelUpload').click()"
+                                            style="
+                                            background: linear-gradient(135deg, #4e73df, #365ace);
+                                            color: white;
+                                            padding: 6px 15px;
+                                            font-size: .75rem;
+                                            font-weight: 700;
+                                            border-radius: 8px;
+                                            box-shadow: 0 2px 6px rgba(78,115,223,0.3);
+                                            white-space: nowrap;
+                                            border: none;
+                                            ">
+                                            <i class="fas fa-upload fa-sm mr-2"></i> Upload Model
+                                        </button>
+                                        <input type="file" id="modelUpload" style="display:none" onchange="uploadModel()" accept=".json,.pkl">
+                                      </div>
+
+                                    <div class="matrix-wrap">
+
+                                    <div></div>
+
+                                    <div class="matrix-col-header">
+                                        <div class="pred-title">PREDIKSI</div>
+                                        <div class="col-labels">
+                                        <div class="col-label pos">POSITIF</div>
+                                        <div class="col-label neg">NEGATIF</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="matrix-row-header">
+                                        <div class="row-title">AKTUAL</div>
+                                    </div>
+
+                                    <div class="matrix-cells">
+                                        <div class="matrix-cell cell-tp">
+                                        <div class="cell-num" id="tp">-</div>
+                                        <div class="cell-tag">TP</div>
+                                        </div>
+                                        <div class="matrix-cell cell-fp">
+                                        <div class="cell-num" id="fp">-</div>
+                                        <div class="cell-tag">FP</div>
+                                        </div>
+                                        <div class="matrix-cell cell-fn">
+                                        <div class="cell-num" id="fn">-</div>
+                                        <div class="cell-tag">FN</div>
+                                        </div>
+                                        <div class="matrix-cell cell-tn">
+                                        <div class="cell-num" id="tn">-</div>
+                                        <div class="cell-tag">TN</div>
+                                        </div>
+                                    </div>
+                                    </div>
+
+                                    <div class="metrics-grid mt-3">
+                                    <div class="metric-cell">
+                                        <div class="metric-val" id="accuracy">-</div>
+                                        <div class="metric-label">Akurasi</div>
+                                    </div>
+                                    
+                                    <!-- Presisi Split -->
+                                    <div class="d-flex gap-2" style="gap: 8px;">
+                                        <div class="metric-cell flex-fill">
+                                            <div class="metric-val" id="precision_pos" style="font-size: 1.1rem;">-</div>
+                                            <div class="metric-label" style="font-size: 0.65rem;">Presisi (Pos)</div>
+                                        </div>
+                                        <div class="metric-cell flex-fill">
+                                            <div class="metric-val" id="precision_neg" style="font-size: 1.1rem;">-</div>
+                                            <div class="metric-label" style="font-size: 0.65rem;">Presisi (Neg)</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Recall Split -->
+                                    <div class="d-flex gap-2" style="gap: 8px;">
+                                        <div class="metric-cell flex-fill">
+                                            <div class="metric-val" id="recall_pos" style="font-size: 1.1rem;">-</div>
+                                            <div class="metric-label" style="font-size: 0.65rem;">Recall (Pos)</div>
+                                        </div>
+                                        <div class="metric-cell flex-fill">
+                                            <div class="metric-val" id="recall_neg" style="font-size: 1.1rem;">-</div>
+                                            <div class="metric-label" style="font-size: 0.65rem;">Recall (Neg)</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- F1-Score Split -->
+                                    <div class="d-flex gap-2" style="gap: 8px;">
+                                        <div class="metric-cell flex-fill">
+                                            <div class="metric-val" id="f1_pos" style="font-size: 1.1rem;">-</div>
+                                            <div class="metric-label" style="font-size: 0.65rem;">F1-Score (Pos)</div>
+                                        </div>
+                                        <div class="metric-cell flex-fill">
+                                            <div class="metric-val" id="f1_neg" style="font-size: 1.1rem;">-</div>
+                                            <div class="metric-label" style="font-size: 0.65rem;">F1-Score (Neg)</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    
+                    <div class="row mt-4">
+                        <div class="col-lg-12">
+                            <div class="card shadow mb-4" style="display:none;">
+                                <div class="card-body">
+                                    <div class="table-responsive" style="display:none;">
+                                     <table class="table table-bordered" id="uploadedTable" width="100%" cellspacing="0">
+                                      <thead id="uploadedTableHead"></thead>
+                                        <tbody id="uploadedTableBody"></tbody>
+                                        </table>
+                                        <div class="d-flex align-items-center justify-content-between mt-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="pageSizeSelect" class="mr-2 small text-muted mb-0"></label>
+                                                <div id="paginationInfo" class="text-muted small"></div>
+                                            </div>
+                                            <nav>
+                                                <ul class="pagination mb-0" id="paginationControls"></ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+             <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <!-- Bar chart will be initialized by updateChartsFromStorage function -->
+    <!-- <script src="js/demo/chart-area-demo.js"></script> -->
+    <!-- <script src="js/demo/chart-pie-demo.js"></script> -->
+
+    <!-- Uploaded data handling script -->
+    <script>
+        
+        // Pembantu: pengurai CSV yang tangguh yang menangani bidang yang dikutip
+        function csvToArray(strData, strDelimiter) {
+            strDelimiter = (strDelimiter || ",");
+            const objPattern = new RegExp(
+                (
+                    "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+                    "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+                    "([^\"\\" + strDelimiter + "\\r\\n]*))"
+                ),
+                "gi"
+            );
+            const arrData = [[]];
+            let arrMatches = null;
+            while ((arrMatches = objPattern.exec(strData))) {
+                const strMatchedDelimiter = arrMatches[1];
+                if (strMatchedDelimiter.length && strMatchedDelimiter !== strDelimiter) {
+                    arrData.push([]);
+                }
+                let strMatchedValue;
+                if (arrMatches[2]) {
+                    strMatchedValue = arrMatches[2].replace(/""/g, '"');
+                } else {
+                    strMatchedValue = arrMatches[3];
+                }
+                arrData[arrData.length - 1].push(strMatchedValue);
+            }
+            return arrData;
+        }
+
+        // pageSize: jumlah baris per halaman. 0 = tampilkan semua
+        let pageSize = 10; // default
+        let tableHeader = [];
+        let tableRows = [];
+        let currentPage = 1;
+
+        // Fungsi untuk mengosongkan data tabel dari memori dan UI
+        function clearTable() {
+            tableHeader = [];
+            tableRows = [];
+            currentPage = 1;
+            document.getElementById('uploadedTableHead').innerHTML = '';
+            document.getElementById('uploadedTableBody').innerHTML = '';
+            document.getElementById('paginationControls').innerHTML = '';
+            document.getElementById('paginationInfo').textContent = '';
+            // atur ulang tampilan hitungan
+            try { computePositiveCount(); computeNegativeCount(); } catch (e) { /* abaikan jika belum siap */ }
+        }
+            
+        // Fungsi untuk merender data tabel dari array baris
+        function renderDataFromArray(arr) {
+            console.log('renderDataFromArray called with:', arr ? arr.length : 0, 'rows');
+            if (!arr || !arr.length) {
+                console.warn('renderDataFromArray: No data provided');
+                return;
+            }
+            tableHeader = arr[0];
+            tableRows = arr.slice(1);
+            console.log('Data parsed - Header:', tableHeader, 'Rows:', tableRows.length);
+            console.log('First few rows sample:', tableRows.slice(0, 3));
+            currentPage = 1;
+            showPage(1);
+            
+            // Perbarui hitungan setelah memastikan DOM siap
+            console.log('renderDataFromArray: Ensuring DOM is ready before updating counts...');
+            
+            // Periksa apakah elemen ada
+            const positifCountEl = document.getElementById('positifCount');
+            const negatifCountEl = document.getElementById('negatifCount');
+            const totalCountEl = document.getElementById('totalCount');
+            console.log('renderDataFromArray: Elements check - positifCount:', !!positifCountEl, 'negatifCount:', !!negatifCountEl, 'totalcount:', !!totalCountEl);
+            
+            if (positifCountEl && negatifCountEl && totalCountEl) {
+                console.log('renderDataFromArray: Elements found, calling computePositiveCount, computeNegativeCount and computeTotalCount IMMEDIATELY');
+            computePositiveCount();
+            computeNegativeCount();
+            computeTotalCount();
+            } else {
+                console.log('renderDataFromArray: Elements not found, waiting for DOM...');
+                // Tunggu DOM siap
+                setTimeout(function() {
+                    console.log('renderDataFromArray: Calling computePositiveCount and computeNegativeCount (delayed)');
+                    computePositiveCount();
+                    computeNegativeCount();
+                    computeTotalCount();
+                }, 200);
+            }
+            
+            // Juga perbarui setelah penundaan lebih lama sebagai cadangan
+            setTimeout(function() {
+                console.log('renderDataFromArray: Calling computeTotalCount, computePositiveCount and computeNegativeCount (backup)');
+                computeTotalCount();
+                computePositiveCount();
+                computeNegativeCount();
+                // Perbarui grafik lingkaran setelah hitungan diperbarui
+                setTimeout(function() {
+                    try {
+                        updateChartsFromStorage();
+                        console.log('renderDataFromArray: Pie chart updated');
+                    } catch (e) {
+                        console.warn('renderDataFromArray: Pie chart update failed:', e);
+                    }
+                }, 100);
+            }, 500);
+            // isi pemilih untuk kolom positif
+            try { populatePositiveColumnSelect(tableHeader); } catch (e) { 
+                console.warn('populatePositiveColumnSelect failed:', e);
+            }
+            console.log('renderDataFromArray completed');
+        }
+
+        // Fungsi untuk memperbarui jumlah total data pada UI
+        function computeTotalCount() {
+            const el = document.getElementById('totalCount');
+            if (!el) return;
+            const summary = computeSentimentSummary();
+            // Jumlah Data = Positif + Negatif, hanya perbarui jika ada data
+            if (summary.total > 0) {
+                el.textContent = String(summary.pos + summary.neg);
+            }
+        }
+
+        // Fungsi untuk menghitung jumlah data negatif berdasarkan kolom sentimen
+        function computeNegativeCount() {
+            // hitung negatif berdasarkan kolom sentimen
+            const el = document.getElementById('negatifCount');
+            if (!el) return;
+            const summary = computeSentimentSummary();
+            // Hanya perbarui jika ada data
+            if (summary.total > 0) {
+                el.textContent = String(summary.neg);
+            }
+        }
+
+        // Fungsi untuk menghitung ringkasan sentimen (positif & negatif) dari data yang ada
+        function computeSentimentSummary() {
+            console.log('=== computeSentimentSummary START ===');
+    const headers = tableHeader || [];
+    let pos = 0, neg = 0;
+
+    if (!tableRows || tableRows.length === 0) {
+                console.log('computeSentimentSummary: No data available');
+        return { pos: 0, neg: 0, total: 0 };
+    }
+
+            console.log('computeSentimentSummary: Processing', tableRows.length, 'rows with', headers.length, 'columns');
+            console.log('computeSentimentSummary: Headers:', headers);
+
+            const headersLower = headers.map(h => String(h).toLowerCase().trim());
+            
+            // Try to find sentiment column with multiple possible names (more aggressive search)
+            let sentimentIndex = -1;
+            const searchTerms = ['sentimen', 'sentiment', 'label', 'klasifikasi', 'class', 'kategori', 'category', 'hasil', 'result', 'prediksi', 'prediction'];
+            
+            for (const term of searchTerms) {
+                sentimentIndex = headersLower.findIndex(h => h.includes(term));
+        if (sentimentIndex !== -1) {
+                    console.log('computeSentimentSummary: Found sentiment column by term "' + term + '" at index', sentimentIndex, 'Header:', headers[sentimentIndex]);
+                    break;
+                }
+            }
+
+            if (sentimentIndex === -1) {
+                // If not found, try to detect by scanning ALL columns and values
+                console.log('computeSentimentSummary: Sentiment column not found by name, scanning all columns...');
+                for (let col = 0; col < headers.length; col++) {
+                    let posCount = 0, negCount = 0, validCount = 0;
+                    const sampleSize = Math.min(tableRows.length, 200);
+                    for (let i = 0; i < sampleSize; i++) {
+                        const val = String(tableRows[i][col] || '').trim().toLowerCase();
+                        if (val === 'positif' || val === 'positive' || val === '1' || val === 'pos' || val === 'p') {
+                            posCount++;
+                            validCount++;
+                        } else if (val === 'negatif' || val === 'negative' || val === '0' || val === 'neg' || val === 'n') {
+                            negCount++;
+                            validCount++;
+                        }
+                    }
+                    // If more than 30% of values are sentiment values, consider this the sentiment column
+                    if (validCount > sampleSize * 0.3) {
+                        sentimentIndex = col;
+                        console.log('computeSentimentSummary: Detected sentiment column at index', col, 'Header:', headers[col], 'Pos:', posCount, 'Neg:', negCount);
+                        break;
+                    }
+                }
+            }
+
+            if (sentimentIndex === -1) {
+                console.warn('computeSentimentSummary: Could not find sentiment column. All headers:', headers);
+                console.warn('computeSentimentSummary: First row sample:', tableRows[0]);
+                return { pos: 0, neg: 0, total: tableRows.length };
+            }
+
+            // Count positive and negative with more flexible matching
+            console.log('computeSentimentSummary: Counting from column index', sentimentIndex, '("' + headers[sentimentIndex] + '")');
+            let sampleValues = [];
+            const positivePatterns = ['positif', 'positive', '1', 'pos', 'p', 'true', 'yes', 'y'];
+            const negativePatterns = ['negatif', 'negative', '0', 'neg', 'n', 'false', 'no'];
+            
+            for (let i = 0; i < tableRows.length; i++) {
+                const r = tableRows[i];
+            const v = String(r[sentimentIndex] || '').trim().toLowerCase();
+                if (i < 10) sampleValues.push(v); // Store first 10 values for debugging
+                
+                // Check if value matches positive patterns
+                let isPositive = positivePatterns.some(pattern => v === pattern || v.includes(pattern));
+                let isNegative = negativePatterns.some(pattern => v === pattern || v.includes(pattern));
+                
+                if (isPositive) {
+                    pos++;
+                } else if (isNegative) {
+                    neg++;
+                }
+            }
+            
+            console.log('computeSentimentSummary: Sample values:', sampleValues);
+            console.log('computeSentimentSummary: Result - Pos:', pos, 'Neg:', neg, 'Total:', tableRows.length);
+            console.log('=== computeSentimentSummary END ===');
+    return { pos, neg, total: tableRows.length };
+}
+
+
+        // Fungsi untuk menghitung jumlah data positif berdasarkan kolom sentimen dan memperbarui UI
+        function computePositiveCountBySentiment() {
+            console.log('=== computePositiveCountBySentiment START ===');
+            
+            // Mencoba beberapa metode untuk menemukan elemen target
+            let el = document.getElementById('positifCount');
+            if (!el) el = document.querySelector('#positifCount');
+            
+            if (!el) {
+                console.error('computePositiveCountBySentiment: positifCount element not found!');
+                return;
+            }
+            
+            // Ambil ringkasan sentimen
+            const summary = computeSentimentSummary();
+            
+            // Perbarui nilai di UI jika ada data
+            if (summary.total > 0) {
+                const countValue = String(summary.pos);
+                el.textContent = countValue;
+                el.innerHTML = countValue;
+            }
+            
+            console.log('=== computePositiveCountBySentiment END ===');
+        }
+
+        // Fungsi untuk mengisi pilihan dropdown kolom positif berdasarkan header tabel
+        function populatePositiveColumnSelect(headers) {
+            const sel = document.getElementById('positifColumnSelect');
+            if (!sel) return;
+            sel.innerHTML = '';
+            const optAuto = document.createElement('option');
+            optAuto.value = 'auto';
+            optAuto.textContent = 'Auto (deteksi)';
+            sel.appendChild(optAuto);
+            const headersLower = (headers || []).map(h => String(h).toLowerCase());
+            (headers || []).forEach((h, idx) => {
+                const opt = document.createElement('option');
+                opt.value = String(idx);
+                opt.textContent = h;
+                sel.appendChild(opt);
+            });
+            const detected = detectPositiveColumnIndex(headersLower);
+            if (detected !== -1) sel.value = String(detected); else sel.value = 'auto';
+            sel.addEventListener('change', function () { computePositiveCount(); computeNegativeCount(); });
+        }
+
+        // Fungsi heuristik untuk mendeteksi indeks kolom yang berisi label sentimen
+        function detectPositiveColumnIndex(headersLower) {
+            if (!headersLower || !headersLower.length) return -1;
+            const candidates = ['positif', 'positive', 'pos', 'label', 'sentiment', 'result', 'class', 'status', 'kategori', 'category', 'prediksi', 'prediction'];
+            for (const c of candidates) {
+                const idx = headersLower.findIndex(h => h.includes(c));
+                if (idx !== -1) return idx;
+            }
+            // pindai nilai sampel per kolom jika header tidak cocok
+            const positiveRegex = /^\s*(1|true|yes|y|pos|positif|positive)\s*$/i;
+            const negativeRegex = /^\s*(0|false|no|n|negatif|negative|neg)\s*$/i;
+            let bestIdx = -1;
+            let bestScore = 0;
+            const rowsToCheck = Math.min(tableRows.length, 200);
+            for (let col = 0; col < headersLower.length; col++) {
+                let pos = 0, neg = 0, nonEmpty = 0, ones = 0, zeros = 0;
+                for (let r = 0; r < rowsToCheck; r++) {
+                    const v = tableRows[r][col];
+                    if (v == null || String(v).trim() === '') continue;
+                    nonEmpty++;
+                    const s = String(v).trim();
+                    if (/^[01]$/.test(s)) { if (s === '1') ones++; else zeros++; }
+                    if (positiveRegex.test(s)) pos++;
+                    if (negativeRegex.test(s)) neg++;
+                }
+                let score = pos - neg;
+                if (ones + zeros > 0) score += (ones - zeros);
+                if (nonEmpty > 0) score = score / Math.sqrt(nonEmpty);
+                if (score > bestScore && score > 0) { bestScore = score; bestIdx = col; }
+            }
+            return bestIdx;
+        }
+
+        // Fungsi pembantu untuk menunggu hingga elemen tersedia di DOM
+        function waitForElement(selector, callback, maxAttempts = 10, interval = 100) {
+            let attempts = 0;
+            // Fungsi internal untuk memeriksa keberadaan elemen secara berulang
+            const checkElement = function() {
+                attempts++;
+                const element = document.querySelector(selector) || document.getElementById(selector.replace('#', ''));
+                if (element) {
+                    console.log('waitForElement: Found element', selector, 'after', attempts, 'attempts');
+                    callback(element);
+                } else if (attempts < maxAttempts) {
+                    setTimeout(checkElement, interval);
+                } else {
+                    console.error('waitForElement: Element', selector, 'not found after', maxAttempts, 'attempts');
+                }
+            };
+            checkElement();
+        }
+
+        // Fungsi utama untuk memicu perhitungan jumlah data positif
+        function computePositiveCount() {
+            console.log('computePositiveCount called');
+            // Tunggu elemen tersedia sebelum memperbarui
+            waitForElement('#positifCount', function() {
+                try { 
+                    computePositiveCountBySentiment(); 
+                    console.log('computePositiveCount: Successfully called computePositiveCountBySentiment');
+                } catch (e) { 
+                    console.error('computePositiveCount error:', e);
+                    console.warn('computePositiveCount fallback', e); 
+                }
+            });
+        }
+
+        // Fungsi untuk merender data tabel dari array objek
+        function renderDataFromObjects(data) {
+            console.log('renderDataFromObjects called with:', data ? data.length : 0, 'items');
+            if (!Array.isArray(data)) {
+                console.error('renderDataFromObjects: Data is not an array');
+                alert('JSON must be an array of objects or arrays');
+                return;
+            }
+            if (data.length === 0) {
+                console.warn('renderDataFromObjects: Empty array');
+                return;
+            }
+            // Jika array berisi array, anggap baris pertama sebagai header
+            if (Array.isArray(data[0])) {
+                console.log('renderDataFromObjects: Detected array of arrays, delegating to renderDataFromArray');
+                renderDataFromArray(data);
+                return;
+            }
+            // Array objek => satukan menjadi header + baris
+            console.log('renderDataFromObjects: Detected array of objects, converting...');
+            const keys = Array.from(data.reduce((s, o) => { Object.keys(o).forEach(k => s.add(k)); return s; }, new Set()));
+            const rows = data.map(o => keys.map(k => o[k] == null ? '' : String(o[k])));
+            console.log('renderDataFromObjects: Converted to', keys.length, 'columns,', rows.length, 'rows');
+            renderDataFromArray([keys, ...rows]);
+        }
+
+        // Fungsi untuk menampilkan data pada halaman tertentu (paginasi)
+        function showPage(page) {
+            // sinkronkan pageSize dengan pemilih jika berubah
+            const sel = document.getElementById('pageSizeSelect');
+            if (sel) {
+                const val = parseInt(sel.value, 10);
+                if (!isNaN(val)) pageSize = val;
+            }
+
+            const totalRows = tableRows.length;
+            const totalPages = pageSize === 0 ? 1 : Math.max(1, Math.ceil(totalRows / pageSize));
+            if (page < 1) page = 1;
+            if (page > totalPages) page = totalPages;
+            currentPage = page;
+
+            // render header tabel
+            const theadEl = document.getElementById('uploadedTableHead');
+            if (theadEl) {
+            if (tableHeader && tableHeader.length) {
+                const thead = tableHeader.map(h => `<th>${escapeHtml(h)}</th>`).join('');
+                    theadEl.innerHTML = `<tr>${thead}</tr>`;
+                    console.log('Table header rendered:', tableHeader);
+            } else {
+                    theadEl.innerHTML = '';
+                    console.warn('No table header to render');
+                }
+            } else {
+                console.error('uploadedTableHead element not found!');
+            }
+
+            // Hitung baris awal dan akhir untuk paginasi
+            let start, end;
+            if (pageSize === 0) {
+                start = 0;
+                end = totalRows;
+            } else {
+                start = (currentPage - 1) * pageSize;
+                end = Math.min(start + pageSize, totalRows);
+            }
+
+            // render baris untuk halaman saat ini
+            const tbodyEl = document.getElementById('uploadedTableBody');
+            if (tbodyEl) {
+            const pageRows = tableRows.slice(start, end);
+                console.log('Rendering page rows:', { start, end, pageRowsCount: pageRows.length, totalRows });
+            // deteksi indeks kolom sentimen untuk pewarnaan label
+            let sentimentIdx = -1;
+            try {
+                if (tableHeader && tableHeader.length) {
+                    const headersLower = tableHeader.map(h => String(h).toLowerCase());
+                    const candidates = ['sentimen','sentiment','label','klasifikasi','hasil','prediksi','prediction','result','class','kategori','category'];
+                    for (const term of candidates) {
+                        const idx = headersLower.findIndex(h => h.includes(term));
+                        if (idx !== -1) { sentimentIdx = idx; break; }
+                    }
+                }
+            } catch (e) { console.warn('sentiment detection failed', e); }
+
+            const formatSentimentCell = (val) => {
+                const s = String(val || '').trim();
+                const sLow = s.toLowerCase();
+                const posRegex = /^(1|true|yes|y|pos|positif|positive)$/i;
+                const negRegex = /^(0|false|no|n|negatif|negative|neg)$/i;
+                if (posRegex.test(sLow) || sLow.includes('posit')) return `<span class="sent-badge pos">${escapeHtml(s)}</span>`;
+                if (negRegex.test(sLow) || sLow.includes('negat')) return `<span class="sent-badge neg">${escapeHtml(s)}</span>`;
+                return escapeHtml(s);
+            };
+
+            const tbody = pageRows.map(r => '<tr>' + r.map((c, ci) => {
+                if (ci === sentimentIdx) return `<td>${formatSentimentCell(c)}</td>`;
+                return `<td>${escapeHtml(c)}</td>`;
+            }).join('') + '</tr>').join('');
+                tbodyEl.innerHTML = tbody;
+            }
+
+            // log debug
+            console.log('showPage', { page, pageSize, totalRows, start, end });
+
+            // perbarui informasi paginasi
+            const paginationInfoEl = document.getElementById('paginationInfo');
+            if (paginationInfoEl) {
+                if (totalRows === 0) {
+                    paginationInfoEl.textContent = 'Tidak ada data';
+} else if (pageSize === 0) {
+                    paginationInfoEl.textContent =
+                        `Menampilkan 1–${totalRows} dari ${totalRows} (Semua)`;
+} else {
+                    paginationInfoEl.textContent =
+                        `Menampilkan ${start + 1}–${Math.min(end, totalRows)} dari ${totalRows}`;
+                }
+}
+
+            // perbarui kontrol navigasi
+            updatePaginationControls(totalPages);
+        }
+
+        // Fungsi untuk memperbarui elemen kontrol navigasi paginasi
+        function updatePaginationControls(totalPages) {
+            const container = document.getElementById('paginationControls');
+            container.innerHTML = '';
+            // jika menampilkan semua atau hanya satu halaman, sembunyikan kontrol
+            if (pageSize === 0 || totalPages <= 1) {
+                return;
+            }
+            // tombol sebelumnya (prev)
+            const prev = document.createElement('li');
+            prev.className = 'page-item ' + (currentPage === 1 ? 'disabled' : '');
+            prev.innerHTML = `<a class="page-link" href="#" tabindex="-1">Previous</a>`;
+            prev.addEventListener('click', function (e) { e.preventDefault(); if (currentPage > 1) showPage(currentPage - 1); });
+            container.appendChild(prev);
+
+            // nomor halaman (dibatasi maksimal 7 tombol)
+            const maxButtons = 7;
+            let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+            let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+            if (endPage - startPage < maxButtons - 1) {
+                startPage = Math.max(1, endPage - maxButtons + 1);
+            }
+            for (let p = startPage; p <= endPage; p++) {
+                const li = document.createElement('li');
+                li.className = 'page-item ' + (p === currentPage ? 'active' : '');
+                li.innerHTML = `<a class="page-link" href="#">${p}</a>`;
+                li.addEventListener('click', function (e) { e.preventDefault(); showPage(p); });
+                container.appendChild(li);
+            }
+
+            // tombol berikutnya (next)
+            const next = document.createElement('li');
+            next.className = 'page-item ' + (currentPage === totalPages ? 'disabled' : '');
+            next.innerHTML = `<a class="page-link" href="#">Next</a>`;
+            next.addEventListener('click', function (e) { e.preventDefault(); if (currentPage < totalPages) showPage(currentPage + 1); });
+            container.appendChild(next);
+        }
+
+        // Menyiapkan pemilih ukuran halaman ketika dropdown berubah
+        function setupPageSizeSelector() {
+            const pageSizeSelect = document.getElementById('pageSizeSelect');
+            if (pageSizeSelect) {
+                pageSizeSelect.addEventListener('change', function (e) {
+            const val = parseInt(e.target.value, 10);
+            if (!isNaN(val)) {
+                pageSize = val;
+                showPage(1);
+            }
+        });
+            }
+        }
+
+        // Fungsi untuk melarikan (escape) karakter HTML agar aman ditampilkan
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        // Fungsi global untuk menangani unggahan file - dipanggil langsung dari onchange input file
+        function handleFileUpload(inputElement) {
+            const file = inputElement.files[0];
+            if (!file) {
+                console.log('No file selected');
+                return;
+            }
+            console.log('handleFileUpload called - File selected:', file.name, 'Type:', file.type);
+            
+            const fileNameEl = document.getElementById('fileName');
+            if (fileNameEl) {
+                fileNameEl.textContent = file.name;
+            }
+            
+            const reader = new FileReader();
+            reader.onerror = function(err) {
+                console.error('FileReader error:', err);
+                alert('Error membaca file: ' + err.message);
+            };
+            
+            reader.onload = function (ev) {
+                const text = ev.target.result;
+                console.log('File read successfully, length:', text.length);
+                
+                clearTable();
+                
+                if (file.name.toLowerCase().endsWith('.json') || file.type === 'application/json') {
+                    try {
+                        console.log('Parsing as JSON...');
+                        const parsed = JSON.parse(text);
+                        console.log('JSON parsed successfully, rows:', parsed.length);
+                        renderDataFromObjects(parsed);
+                    } catch (err) {
+                        console.error('JSON parse error:', err);
+                        alert('Gagal membaca JSON: ' + err.message);
+                    }
+                } else {
+                    // anggap sebagai CSV
+                    try {
+                        console.log('Parsing as CSV...');
+                        const arr = csvToArray(text);
+                        console.log('CSV parsed successfully, rows:', arr.length);
+                        renderDataFromArray(arr);
+                    } catch (err) {
+                        console.error('CSV parse error:', err);
+                        alert('Gagal membaca CSV: ' + err.message);
+                    }
+                }
+                
+                // simpan ke sessionStorage agar tidak perlu unggah ulang
+                try {
+                    saveCurrentDataToStorage();
+                    // pastikan grafik diperbarui segera setelah unggah
+                    setTimeout(function() {
+                        try { 
+                            updateChartsFromStorage(); 
+                            console.log('Charts updated after file upload');
+                        } catch (e) { 
+                            console.warn('Chart update failed:', e);
+                        }
+                    }, 150);
+                    // tulis juga kunci pembaruan agar halaman lain menerima event storage
+                    try { sessionStorage.setItem('uploadedTableData_update', Date.now().toString()); } catch (e) { }
+                } catch (err) {
+                    console.warn('Unable to save uploaded data:', err);
+                }
+            };
+            
+            reader.readAsText(file);
+        }
+
+        // Menyiapkan fungsionalitas tombol unggah saat DOM siap
+        function setupUploadButton() {
+            const uploadBtn = document.getElementById('uploadBtn');
+            const uploadBtnLabel = document.getElementById('uploadBtnLabel');
+            const fileInput = document.getElementById('fileInput');
+            
+            if (!fileInput) {
+                console.error('File input not found!');
+                return false;
+            }
+
+            console.log('Setting up upload button...', { uploadBtn, uploadBtnLabel, fileInput });
+
+            // Metode 1: Gunakan label (paling andal - bekerja secara asli dengan input file)
+            if (uploadBtnLabel) {
+                console.log('Using label method for file upload');
+                // Label sudah terhubung via atribut 'for', tidak perlu setup tambahan
+            }
+
+            // Metode 2: Gunakan tombol sebagai cadangan
+            if (uploadBtn) {
+                // Hapus handler klik yang sudah ada
+                uploadBtn.onclick = null;
+                
+                // Tambahkan event listener klik
+                uploadBtn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Upload button clicked, triggering file input...');
+                    try {
+                        fileInput.click();
+                        console.log('File input click triggered successfully');
+                    } catch (err) {
+                        console.error('Error triggering file input:', err);
+                        alert('Error: Tidak dapat membuka file picker. Silakan coba lagi.');
+                    }
+                    return false;
+                };
+                
+                // Tambahkan juga via addEventListener sebagai cadangan
+                uploadBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Upload button clicked (addEventListener), triggering file input...');
+                    fileInput.click();
+                }, false);
+            }
+            
+            // Fungsi internal untuk menangani perubahan pada input file (ketika file dipilih)
+            function handleFileChange(e) {
+            const file = e.target.files[0];
+                if (!file) {
+                    console.log('No file selected');
+                    return;
+                }
+                console.log('File selected:', file.name, 'Type:', file.type);
+                
+                const fileNameEl = document.getElementById('fileName');
+                if (fileNameEl) {
+                    fileNameEl.textContent = file.name;
+                }
+                
+            const reader = new FileReader();
+                reader.onerror = function(err) {
+                    console.error('FileReader error:', err);
+                    alert('Error membaca file: ' + err.message);
+                };
+                
+            reader.onload = function (ev) {
+                const text = ev.target.result;
+                    console.log('File read successfully, length:', text.length);
+                    
+                clearTable();
+                    
+                if (file.name.toLowerCase().endsWith('.json') || file.type === 'application/json') {
+                    try {
+                            console.log('Parsing as JSON...');
+                        const parsed = JSON.parse(text);
+                            console.log('JSON parsed successfully, rows:', parsed.length);
+                        renderDataFromObjects(parsed);
+                    } catch (err) {
+                            console.error('JSON parse error:', err);
+                        alert('Gagal membaca JSON: ' + err.message);
+                    }
+                } else {
+                    // anggap sebagai CSV
+                    try {
+                            console.log('Parsing as CSV...');
+                        const arr = csvToArray(text);
+                            console.log('CSV parsed successfully, rows:', arr.length);
+                        renderDataFromArray(arr);
+                    } catch (err) {
+                            console.error('CSV parse error:', err);
+                        alert('Gagal membaca CSV: ' + err.message);
+                    }
+                }
+                    
+                // simpan ke sessionStorage agar tidak perlu unggah ulang
+                try {
+                    saveCurrentDataToStorage();
+                    // pastikan grafik diperbarui segera setelah unggah
+                        try { updateChartsFromStorage(); } catch (e) { 
+                            console.warn('Chart update failed:', e);
+                        }
+                    // tulis juga kunci pembaruan agar halaman lain menerima event storage
+                    try { sessionStorage.setItem('uploadedTableData_update', Date.now().toString()); } catch (e) { }
+                } catch (err) {
+                    console.warn('Unable to save uploaded data:', err);
+                }
+            };
+                
+            reader.readAsText(file);
+            }
+            
+            // Hapus listener yang sudah ada terlebih dahulu
+            const oldHandler = fileInput.onchange;
+            fileInput.onchange = null;
+            if (oldHandler) {
+                fileInput.removeEventListener('change', oldHandler);
+            }
+            
+            // Tambahkan event listener menggunakan kedua metode untuk kompatibilitas maksimal
+            fileInput.onchange = handleFileChange;
+            fileInput.addEventListener('change', handleFileChange, false);
+            
+            console.log('File input change handler attached', { 
+                hasOnchange: !!fileInput.onchange, 
+                fileInputId: fileInput.id 
+            });
+            
+            console.log('Upload button and file input setup complete');
+            return true;
+        }
+
+        // Inisialisasi komponen tombol unggah dan pemilih ukuran halaman saat DOM siap
+        function initializeComponents() {
+            console.log('Initializing components...');
+            setupUploadButton();
+            setupPageSizeSelector();
+        }
+
+        // Berbagai cara untuk memastikan inisialisasi
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeComponents);
+        } else {
+            // DOM sudah dimuat, segera inisialisasi
+            initializeComponents();
+        }
+
+        // Cadangan: coba juga setelah penundaan singkat untuk memastikan listener input file terpasang
+        setTimeout(function() {
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput) {
+                console.log('Fallback: Ensuring file input listener is attached...');
+                // Siapkan ulang jika diperlukan
+                if (!fileInput.onchange) {
+                    console.log('File input has no onchange handler, re-initializing...');
+                    setupUploadButton();
+                } else {
+                    console.log('File input already has onchange handler');
+                }
+            }
+        }, 100);
+        
+        // Pastikan juga sudah siap saat jendela dimuat
+        window.addEventListener('load', function() {
+            console.log('Window loaded, checking file input setup...');
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput && !fileInput.onchange) {
+                console.log('File input missing handler on window load, re-initializing...');
+                setupUploadButton();
+            }
+        });
+
+        // Menyimpan data header dan baris tabel saat ini ke sessionStorage
+        function saveCurrentDataToStorage() {
+            try {
+                // Ambil nama file - periksa apakah elemen ada
+                let fileName = null;
+                const fileNameEl = document.getElementById('fileName');
+                if (fileNameEl) {
+                    fileName = fileNameEl.textContent || null;
+                }
+                
+                const payload = {
+                    header: tableHeader,
+                    rows: tableRows,
+                    fileName: fileName,
+                    savedAt: Date.now()
+                };
+                sessionStorage.setItem('uploadedTableData', JSON.stringify(payload));
+                console.log('saveCurrentDataToStorage: Data saved to sessionStorage', tableRows.length, 'rows');
+            } catch (err) {
+                console.warn('Failed to save uploaded data:', err);
+            }
+        }
+        // Memuat data yang tersimpan dari sessionStorage jika ada
+        function loadSavedDataFromStorage() {
+            try {
+                const raw = sessionStorage.getItem('uploadedTableData');
+                if (!raw) {
+                    console.log('loadSavedDataFromStorage: No saved data found');
+                    return false;
+                }
+                const obj = JSON.parse(raw);
+                if (!obj || !obj.header || !obj.rows) {
+                    console.warn('loadSavedDataFromStorage: Invalid saved data structure');
+                    return false;
+                }
+                tableHeader = obj.header;
+                tableRows = obj.rows;
+                console.log('loadSavedDataFromStorage: Loaded', tableRows.length, 'rows');
+                const fileNameEl = document.getElementById('fileName');
+                if (fileNameEl) {
+                    fileNameEl.textContent = obj.fileName || 'Saved data';
+                }
+                // tampilkan halaman pertama
+                showPage(1);
+                try { populatePositiveColumnSelect(tableHeader); } catch (e) { 
+                    console.warn('populatePositiveColumnSelect failed:', e);
+                }
+                computePositiveCount();
+                try { computeNegativeCount(); } catch (e) { 
+                    console.warn('computeNegativeCount failed:', e);
+                }
+                console.log('loadSavedDataFromStorage: Data loaded and counts updated');
+                return true;
+            } catch (err) {
+                console.warn('Failed to load saved uploaded data:', err);
+                return false;
+            }
+        }
+
+        // Clear saved data from storage and UI
+        // Clear Data functionality removed to keep uploaded data persistent
+
+        // Coba memuat data yang tersimpan saat startup
+        (function tryLoadSaved() {
+            console.log('tryLoadSaved: Starting...');
+            const loaded = loadSavedDataFromStorage();
+            console.log('tryLoadSaved: Data loaded =', loaded);
+            
+            // Selalu panggil updateChartsFromStorage setelah mencoba memuat data yang tersimpan
+            // Ini memastikan grafik diperbarui meskipun data dimuat dari sessionStorage
+            setTimeout(function() {
+                console.log('tryLoadSaved: Calling updateChartsFromStorage after load');
+                try {
+                    updateChartsFromStorage();
+                } catch(e) {
+                    console.warn('tryLoadSaved: updateChartsFromStorage error:', e);
+                }
+            }, 100);
+            
+            // tidak ada tombol hapus: data tetap persisten
+            if (!loaded) { /* tidak ada yang ditampilkan */ }
+        })();
+
+        // Pastikan hasil evaluasi model dimuat saat DOM siap
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOMContentLoaded: Loading saved model results...');
+            if (typeof loadSavedModelResults === 'function') {
+                loadSavedModelResults();
+            }
+        });
+
+        // Sinkronisasi hasil evaluasi model jika ada perubahan di tab lain
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'uploadedModelResults') {
+                console.log('Storage event: uploadedModelResults changed, updating UI...');
+                if (typeof loadSavedModelResults === 'function') {
+                    loadSavedModelResults();
+                }
+            }
+        });
+    </script>
+
+    <!-- Pembaruan grafik dinamis dari data yang diunggah -->
+    <script>
+        // Fungsi untuk menghitung jumlah Positif dan Negatif dari payload data
+        function getPosNegCountsFromPayload(payload) {
+            if (!payload || !payload.rows || !payload.rows.length) return { pos: 0, neg: 0, total: 0 };
+            const headers = payload.header || [];
+            const rows = payload.rows || [];
+            const headersLower = headers.map(h => String(h).toLowerCase());
+            const positiveRegex = /^\s*(1|true|yes|y|pos|positif|positive)\s*$/i;
+            const negativeRegex = /^\s*(0|false|no|n|negatif|negative|neg)\s*$/i;
+
+            const candidates = ['positif', 'positive', 'pos', 'label', 'sentiment', 'result', 'class', 'status', 'kategori', 'category'];
+            let colIndex = -1;
+            for (const c of candidates) {
+                const idx = headersLower.findIndex(h => h.includes(c));
+                if (idx !== -1) { colIndex = idx; break; }
+            }
+
+            let pos = 0, neg = 0;
+            if (colIndex !== -1) {
+                for (const r of rows) {
+                    const v = r[colIndex] == null ? '' : String(r[colIndex]).trim();
+                    if (positiveRegex.test(v)) pos++;
+                    else if (negativeRegex.test(v)) neg++;
+                }
+            } else {
+                for (const r of rows) {
+                    let rowPos = false, rowNeg = false;
+                    for (const c of r) {
+                        const s = String(c == null ? '' : c).trim();
+                        if (!rowPos && positiveRegex.test(s)) rowPos = true;
+                        if (!rowNeg && negativeRegex.test(s)) rowNeg = true;
+                    }
+                    if (rowPos) pos++;
+                    else if (rowNeg) neg++;
+                }
+            }
+            return { pos: pos, neg: neg, total: rows.length };
+        }
+
+            // Fungsi utama untuk memperbarui semua grafik berdasarkan data di penyimpanan
+            function updateChartsFromStorage() {
+                console.log('updateChartsFromStorage called');
+                
+                let pos = 0, neg = 0, total = 0;
+                let usedDemoData = false;
+
+                // 1. Coba ambil data dari memori (jika file baru saja diunggah)
+                if (typeof computeSentimentSummary === 'function' && tableRows && tableRows.length > 0) {
+                    const summary = computeSentimentSummary();
+                    pos = summary.pos;
+                    neg = summary.neg;
+                    // Jumlah Data = Positif + Negatif
+                    total = summary.pos + summary.neg;
+                    console.log('updateChartsFromStorage: Using computeSentimentSummary - Pos:', pos, 'Neg:', neg );
+                } 
+                // 2. Coba ambil data dari sessionStorage
+                else {
+                    const raw = sessionStorage.getItem('uploadedTableData');
+                    if (raw) {
+                        try {
+                            const payload = JSON.parse(raw);
+                            const result = getPosNegCountsFromPayload(payload);
+                            pos = result.pos;
+                            neg = result.neg;
+                            total = result.total;
+                            console.log('updateChartsFromStorage: Using sessionStorage - Pos:', pos, 'Neg:', neg);
+                        } catch (e) {
+                            console.warn('updateChartsFromStorage: Error parsing sessionStorage', e);
+                        }
+                    }
+                }
+
+                // Perbarui kartu jumlah total jika ada data
+                const totalEl = document.getElementById('totalCount');
+                if (totalEl && total > 0) totalEl.textContent = total;
+
+                // (Bagian Data Demo telah dihapus agar UI tetap kosong jika tidak ada data sesi)
+
+                // Perbarui statistik ringkasan di kartu grafik kiri jika ada data
+                const distPosCountEl = document.getElementById("distPosCount");
+                const distNegCountEl = document.getElementById("distNegCount");
+                const distPosPercentEl = document.getElementById("distPosPercent");
+                const distNegPercentEl = document.getElementById("distNegPercent");
+
+                if (total > 0) {
+                    if (distPosCountEl) distPosCountEl.textContent = pos;
+                    if (distNegCountEl) distNegCountEl.textContent = neg;
+
+                    // Hitung dan tampilkan persentase
+                    const totalData = pos + neg;
+                    const posPercent = totalData > 0 ? ((pos / totalData) * 100).toFixed(1) : 0;
+                    const negPercent = totalData > 0 ? ((neg / totalData) * 100).toFixed(1) : 0;
+
+                    if (distPosPercentEl) distPosPercentEl.textContent = posPercent + '%';
+                    if (distNegPercentEl) distNegPercentEl.textContent = negPercent + '%';
+                }
+
+                // Warna: Hijau untuk positif, Merah untuk negatif
+                const positifColor = '#1cc88a'; // Hijau
+                const negatifColor = '#e74a3b'; // Merah
+                const positifHoverColor = '#17a673'; // Hijau lebih gelap
+                const negatifHoverColor = '#be2617'; // Merah lebih gelap
+
+                // Grafik lingkaran dihapus — UI confusion matrix digunakan sebagai gantinya.
+                // (Placeholder tetap ada untuk elemen confusion matrix; nilai dapat diatur di tempat lain.)
+                const confTP = document.getElementById('conf-tp');
+                const confFP = document.getElementById('conf-fp');
+                const confFN = document.getElementById('conf-fn');
+                const confTN = document.getElementById('conf-tn');
+                if (confTP) confTP.textContent = confTP.textContent || '-';
+                if (confFP) confFP.textContent = confFP.textContent || '-';
+                if (confFN) confFN.textContent = confFN.textContent || '-';
+                if (confTN) confTN.textContent = confTN.textContent || '-';
+
+                // --- Perbarui Grafik Batang (Chart.js v2) ---
+                const barCtx = document.getElementById("myBarChart");
+                if (barCtx) {
+                    // Pembantu untuk memformat angka
+                    const number_format = (number, decimals, dec_point, thousands_sep) => {
+                        // *     contoh: number_format(1234.56, 2, ',', ' ');
+                        // *     hasil: '1 234,56'
+                        number = (number + '').replace(',', '').replace(' ', '');
+                        var n = !isFinite(+number) ? 0 : +number,
+                            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+                            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+                            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+                            s = '',
+                            toFixedFix = function(n, prec) {
+                                var k = Math.pow(10, prec);
+                                return '' + Math.round(n * k) / k;
+                            };
+                        s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+                        if (s[0].length > 3) {
+                            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+                        }
+                        if ((s[1] || '').length < prec) {
+                            s[1] = s[1] || '';
+                            s[1] += new Array(prec - s[1].length + 1).join('0');
+                        }
+                        return s.join(dec);
+                    };
+
+                    const maxVal = Math.max(pos, neg, 1);
+                    const totalVal = pos + neg;
+                    
+                    if (myBarChart) {
+                        myBarChart.data.labels = ['', 'Positif', 'Negatif', ''];
+                        myBarChart.data.datasets[0].data = [0, pos, neg, 0];
+                        if (myBarChart.options.scales.yAxes[0]) {
+                            myBarChart.options.scales.yAxes[0].ticks.max = Math.ceil(maxVal * 1.2);
+                        }
+                        myBarChart.update();
+                    } else {
+                        myBarChart = new Chart(barCtx, {
+                            type: 'line',
+                            data: {
+                                labels: ['', 'Positif', 'Negatif', ''],
+                                datasets: [{
+                                    label: 'Jumlah Data',
+                                    lineTension: 0.5,
+                                    backgroundColor: "rgba(240, 244, 255, 1)",
+                                    borderColor: "rgba(78, 115, 223, 1)",
+                                    pointRadius: 4,
+                                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                                    pointBorderColor: "rgba(78, 115, 223, 1)",
+                                    pointHoverRadius: 5,
+                                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                                    pointHitRadius: 10,
+                                    pointBorderWidth: 2,
+                                    data: [0, pos, neg, 0],
+                                    fill: true,
+                                }]
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                layout: {
+                                    padding: {
+                                        left: 10,
+                                        right: 25,
+                                        top: 25,
+                                        bottom: 0
+                                    }
+                                },
+                                scales: {
+                                    xAxes: [{
+                                        gridLines: {
+                                            display: false,
+                                            drawBorder: false
+                                        },
+                                        ticks: {
+                                            maxTicksLimit: 6
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        ticks: {
+                                            min: 0,
+                                            max: Math.ceil(maxVal * 1.2),
+                                            maxTicksLimit: 5,
+                                            padding: 10,
+                                            callback: function(value, index, values) {
+                                                return number_format(value);
+                                            }
+                                        },
+                                        gridLines: {
+                                            color: "rgb(234, 236, 244)",
+                                            zeroLineColor: "rgb(234, 236, 244)",
+                                            drawBorder: false,
+                                            borderDash: [2],
+                                            zeroLineBorderDash: [2]
+                                        }
+                                    }],
+                                },
+                                legend: {
+                                    display: false
+                                },
+                                tooltips: {
+                                    titleMarginBottom: 10,
+                                    titleFontColor: '#6e707e',
+                                    titleFontSize: 14,
+                                    backgroundColor: "rgb(255,255,255)",
+                                    bodyFontColor: "#858796",
+                                    borderColor: '#dddfeb',
+                                    borderWidth: 1,
+                                    xPadding: 15,
+                                    yPadding: 15,
+                                    displayColors: false,
+                                    caretPadding: 10,
+                                    filter: function(tooltipItem) {
+                                        // Hide tooltips for dummy points (0 values at edges)
+                                        return tooltipItem.index === 1 || tooltipItem.index === 2;
+                                    },
+                                    callbacks: {
+                                        label: function(tooltipItem, chart) {
+                                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                                            var value = tooltipItem.yLabel;
+                                            return datasetLabel + ': ' + number_format(value);
+                                        }
+                                    }
+                                },
+                            }
+                        });
+                    }
+                }
+            }
+
+            // Event listener untuk memperbarui grafik saat DOM siap
+            document.addEventListener('DOMContentLoaded', updateChartsFromStorage);
+               
+            let myBarChart = null;
+    </script>
+
+    <script>
+        // Handler generik: membuat elemen dengan kelas .clickable-card menavigasi ke data-href mereka
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.clickable-card').forEach(function (el) {
+                el.style.cursor = 'pointer';
+                el.addEventListener('click', function () {
+                    const h = el.getAttribute('data-href'); if (h) window.location.href = h;
+                });
+                el.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const h = el.getAttribute('data-href'); if (h) window.location.href = h; }
+                });
+            });
+        });
+
+        // Fungsi untuk upload model
+        function uploadModel() {
+            const fileInput = document.getElementById("modelUpload");
+            if (!fileInput.files[0]) {
+                alert("Silakan pilih file model (JSON) terlebih dahulu.");
+                return;
+            }
+            const formData = new FormData();
+            formData.append("model", fileInput.files[0]);
+
+            fetch("http://127.0.0.1:5000/upload-model", {
+                method: "POST",
+                body: formData
+            })
+            .then(res => {
+                if (!res.ok) {
+                    return res.text().then(text => {
+                        throw new Error(`Server Error (${res.status}): ${text.substring(0, 100)}`);
+                    });
+                }
+                return res.json();
+            })
+            .then(data => {
+                console.log("DEBUG - JSON Data Received:", data);
+                
+                // Simpan hasil evaluasi model ke sessionStorage agar tidak hilang saat refresh
+                try {
+                    sessionStorage.setItem('uploadedModelResults', JSON.stringify(data));
+                    console.log("Model evaluation results saved to sessionStorage");
+                } catch (e) {
+                    console.warn("Failed to save model results to sessionStorage:", e);
+                }
+
+                // Tampilkan data ke UI
+                displayModelResults(data);
+            })
+            .catch(error => {
+                console.error("Detailed Fetch Error:", error);
+                alert("Gagal memproses data: " + error.message + 
+                      "\n\nLangkah-langkah perbaikan:\n" +
+                      "1. Pastikan file app.py sudah dijalankan (python app.py)\n" +
+                      "2. Pastikan server Flask jalan di http://127.0.0.1:5000\n" +
+                      "3. Jika server jalan tapi masih gagal, coba tekan F12 untuk melihat detail error di Console.");
+            });
+        }
+
+        // Fungsi pembantu untuk menampilkan hasil evaluasi model pada UI
+        function displayModelResults(data) {
+            if (!data) return;
+
+            // 1. Ambil data Confusion Matrix dari detail_confusion_matrix
+            const detail = data.detail_confusion_matrix || {};
+            
+            // Ambil nilai TN, FP, FN, TP secara eksplisit
+            const tn = detail.TN;
+            const fp = detail.FP;
+            const fn = detail.FN;
+            const tp = detail.TP;
+
+            console.log("DEBUG - Displaying:", { tn, fp, fn, tp });
+
+            // Perbarui UI jika nilai ada (tidak undefined)
+            if (tn !== undefined) document.getElementById("tn").innerText = tn;
+            if (fp !== undefined) document.getElementById("fp").innerText = fp;
+            if (fn !== undefined) document.getElementById("fn").innerText = fn;
+            if (tp !== undefined) document.getElementById("tp").innerText = tp;
+
+            // 2. Pemetaan Metrik Lainnya (Akurasi & Laporan)
+            const accuracy = data.accuracy || 0;
+            const accuracyEl = document.getElementById("accuracy");
+            if (accuracyEl) {
+                accuracyEl.innerText = (accuracy > 1 ? accuracy : accuracy * 100).toFixed(2) + "%";
+            }
+
+            const report = data.classification_report || {};
+            
+            // Positif
+            const pos = report.Positif || {};
+            const precPosEl = document.getElementById("precision_pos");
+            const recPosEl = document.getElementById("recall_pos");
+            const f1PosEl = document.getElementById("f1_pos");
+            
+            if (precPosEl) precPosEl.innerText = (pos.precision ? (pos.precision > 1 ? pos.precision : pos.precision * 100).toFixed(2) : "0.00") + "%";
+            if (recPosEl) recPosEl.innerText = (pos.recall ? (pos.recall > 1 ? pos.recall : pos.recall * 100).toFixed(2) : "0.00") + "%";
+            if (f1PosEl) f1PosEl.innerText = (pos["f1-score"] ? (pos["f1-score"] > 1 ? pos["f1-score"] : pos["f1-score"] * 100).toFixed(2) : "0.00") + "%";
+            
+            // Negatif
+            const neg = report.Negatif || {};
+            const precNegEl = document.getElementById("precision_neg");
+            const recNegEl = document.getElementById("recall_neg");
+            const f1NegEl = document.getElementById("f1_neg");
+            
+            if (precNegEl) precNegEl.innerText = (neg.precision ? (neg.precision > 1 ? neg.precision : neg.precision * 100).toFixed(2) : "0.00") + "%";
+            if (recNegEl) recNegEl.innerText = (neg.recall ? (neg.recall > 1 ? neg.recall : neg.recall * 100).toFixed(2) : "0.00") + "%";
+            if (f1NegEl) f1NegEl.innerText = (neg["f1-score"] ? (neg["f1-score"] > 1 ? neg["f1-score"] : neg["f1-score"] * 100).toFixed(2) : "0.00") + "%";
+            
+            if (tn === undefined && fp === undefined && fn === undefined && tp === undefined) {
+                console.warn("Confusion matrix data missing in JSON!");
+            }
+        }
+
+        // Fungsi untuk memuat hasil evaluasi model yang tersimpan dari sessionStorage
+        function loadSavedModelResults() {
+            try {
+                const raw = sessionStorage.getItem('uploadedModelResults');
+                if (raw) {
+                    const data = JSON.parse(raw);
+                    console.log("Loading saved model results from sessionStorage");
+                    displayModelResults(data);
+                }
+            } catch (e) {
+                console.warn("Failed to load model results from sessionStorage:", e);
+            }
+        }
+    </script>
+
+</body>
+
+</html>

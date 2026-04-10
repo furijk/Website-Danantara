@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Danantara - Prediksi</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Page Title - Centered -->
+                    <div class="d-flex align-items-center justify-content-center w-100">
+                        <h1 class="h3 mb-0 text-gray-800 dashboard-title">Prediksi Sentimen</h1>
+                    </div>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Centered page heading -->
+                    <div class="d-flex align-items-center justify-content-between mb-4" style="position: relative;">
+                        <a href="index.html" class="btn btn-secondary shadow-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-arrow-left fa-sm"></i> Kembali
+                        </a>
+                    </div>
+
+                    <!-- Sentiment search card (main area) -->
+                    <div class="row mb-4">
+                        <div class="col-lg-12">
+                            <div class="card shadow-sm rounded">
+                                <div class="card-body p-4">
+                                    <div class="form-group">
+                                        <label for="sentimentSearchInput">Masukkan Kalimat:</label>
+                                        <input id="sentimentSearchInput" class="form-control form-control-lg" placeholder="Contoh: Saya senang hari ini; Pelayanan ini buruk">
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <button id="searchBtn" class="btn btn-primary">Prediksi</button>
+                                        <div id="searchResult" class="mt-3 ml-3" style="flex:1"></div>
+                                    </div>
+                                    <!-- Hidden file input kept for upload functionality -->
+                                    <input type="file" id="fileInput" accept=".csv,application/json" style="display:none">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Remaining content is identical to index -->
+
+                    </div>
+
+                    <!-- Area chart, pie chart, uploaded data table, and scripts are identical to index.html -->
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
+    <!-- Prediksi berbasis data upload: lookup kata/kalimat → label sentimen -->
+    <script>
+        // Fungsi untuk mengubah string menjadi huruf kecil (lowercase)
+        function lower(s) { return String(s || '').toLowerCase(); }
+        // Fungsi untuk mengambil data yang diunggah dari sessionStorage
+        function getUploaded() {
+            try { const raw = sessionStorage.getItem('uploadedTableData'); if (!raw) return null; return JSON.parse(raw); } catch(e){ return null; }
+        }
+        // Fungsi untuk menemukan indeks kolom sentimen dalam dataset berdasarkan nama header atau konten
+        function findSentimentIndex(headers, rows) {
+            const hl = (headers || []).map(h => lower(h).trim());
+            const terms = ['sentimen','sentiment','label','klasifikasi','class','kategori','category','hasil','result','prediksi','prediction'];
+            for (const t of terms) { const i = hl.findIndex(h => h.includes(t)); if (i !== -1) return i; }
+            for (let col = 0; col < (headers||[]).length; col++) {
+                let posCount=0, negCount=0, valid=0; const sample = Math.min((rows||[]).length, 200);
+                for (let i=0;i<sample;i++){ const v = lower(rows[i][col]).trim();
+                    if (v === 'positif' || v === 'positive' || v === '1' || v === 'pos' || v === 'p' || v === 'true' || v === 'yes' || v === 'y') { posCount++; valid++; }
+                    else if (v === 'negatif' || v === 'negative' || v === '0' || v === 'neg' || v === 'n' || v === 'false' || v === 'no') { negCount++; valid++; }
+                }
+                if (valid > sample * 0.3) return col;
+            }
+            return -1;
+        }
+        // Fungsi untuk mengonversi nilai teks menjadi indikator numerik sentimen (1 untuk positif, -1 untuk negatif)
+        function sentimentVal(v) {
+            const s = lower(v).trim();
+            if (s === 'positif' || s === 'positive' || s === '1' || s === 'pos' || s === 'p' || s === 'true' || s === 'yes' || s === 'y') return 1;
+            if (s === 'negatif' || s === 'negative' || s === '0' || s === 'neg' || s === 'n' || s === 'false' || s === 'no') return -1;
+            return 0;
+        }
+        // Fungsi untuk memprediksi sentimen suatu teks berdasarkan kemunculannya di dataset yang diunggah
+        function predictFromDataset(text) {
+            const data = getUploaded(); if (!data || !data.rows || !data.rows.length) return { label: null, pos:0, neg:0, total:0, matches:[] };
+            const headers = data.header || []; const rows = data.rows || [];
+            const idx = findSentimentIndex(headers, rows); if (idx === -1) return { label: null, pos:0, neg:0, total:rows.length, matches:[] };
+            const q = lower(text).trim(); if (!q) return { label: null, pos:0, neg:0, total:rows.length, matches:[] };
+            let pos=0, neg=0; const matches=[];
+            for (let i=0;i<rows.length;i++){ const r = rows[i]; const cellsLower = r.map(c => lower(c));
+                if (cellsLower.some(c => c.includes(q))) { const sv = sentimentVal(r[idx]); if (sv>0) pos++; else if (sv<0) neg++; matches.push(i); }
+            }
+            let label;
+
+                if (pos === 0 && neg === 0) {
+                     label = 'Data tidak ditemukan';
+                } else {
+                     label = pos >= neg ? 'Positif' : 'Negatif';
+                    }
+
+                return { label, pos, neg, total: rows.length, matches };
+                }
+
+        // Fungsi utama untuk menangani proses pencarian dan menampilkan hasil prediksi di UI
+        function performSentimentSearch() {
+            const out = document.getElementById('searchResult');
+            const q = (document.getElementById('sentimentSearchInput') || {}).value || '';
+            if (!out) return;
+            if (!q.trim()) {
+                out.innerHTML = '<div class="text-muted">Masukkan kalimat untuk diprediksi.</div>';
+                return;
+            }
+
+            const r = predictFromDataset(q);
+            if (!r.label) { out.innerHTML = '<div class="alert alert-warning">Tidak ada data atau kolom sentimen tidak ditemukan.</div>'; return; }
+            let badgeClass;
+            if (r.label === 'Positif') {
+                badgeClass = 'badge-success';
+            } else if (r.label === 'Negatif') {
+                badgeClass = 'badge-danger';
+            } else {
+                badgeClass = 'badge-warning'; // untuk "Tidak ditemukan"
+            }
+            let html = '';
+            html += `<div class="alert alert-light border">`;
+            html += `<div class="mb-2">Prediksi: <span class="badge ${badgeClass}">${r.label}</span></div>`;
+            html += `<div class="small text-muted mb-2">Cocok: Positif ${r.pos}, Negatif ${r.neg}</div>`;
+            // if (r.matches.length) html += `<div class="small text-muted">Ditemukan pada ${r.matches.length} baris.</div>`;
+            // html += `</div>`;
+            out.innerHTML = html;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const btn = document.getElementById('searchBtn');
+            if (btn) btn.addEventListener('click', performSentimentSearch);
+            const input = document.getElementById('sentimentSearchInput');
+            if (input) input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); performSentimentSearch(); } });
+        });
+    </script>
+
+    <script>
+        // Mendukung kartu yang dapat diklik untuk navigasi menggunakan keyboard dan mouse
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.clickable-card').forEach(function (el) {
+                el.style.cursor = 'pointer';
+                el.addEventListener('click', function () {
+                    const h = el.getAttribute('data-href'); if (h) window.location.href = h;
+                });
+                el.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const h = el.getAttribute('data-href'); if (h) window.location.href = h; }
+                });
+            });
+        });
+    </script>
+
+    <!-- Memperbarui grafik lingkaran/area dari data yang diunggah jika tersedia -->
+    <script>
+        // Fungsi untuk menghitung jumlah Positif dan Negatif dari payload data
+        function getPosNegCountsFromPayload(payload) {
+            if (!payload || !payload.rows || !payload.rows.length) return { pos: 0, neg: 0, total: 0 };
+            const headers = payload.header || [];
+            const rows = payload.rows || [];
+            const headersLower = headers.map(h => String(h).toLowerCase());
+            const positiveRegex = /^\s*(1|true|yes|y|pos|positif|positive)\s*$/i;
+            const negativeRegex = /^\s*(0|false|no|n|negatif|negative|neg)\s*$/i;
+
+            const candidates = ['positif', 'positive', 'pos', 'label', 'sentiment', 'result', 'class', 'status', 'kategori', 'category'];
+            let colIndex = -1;
+            for (const c of candidates) {
+                const idx = headersLower.findIndex(h => h.includes(c));
+                if (idx !== -1) { colIndex = idx; break; }
+            }
+
+            let pos = 0, neg = 0;
+            if (colIndex !== -1) {
+                for (const r of rows) {
+                    const v = r[colIndex] == null ? '' : String(r[colIndex]).trim();
+                    if (positiveRegex.test(v)) pos++;
+                    else if (negativeRegex.test(v)) neg++;
+                }
+            } else {
+                for (const r of rows) {
+                    let rowPos = false, rowNeg = false;
+                    for (const c of r) {
+                        const s = String(c == null ? '' : c).trim();
+                        if (!rowPos && positiveRegex.test(s)) rowPos = true;
+                        if (!rowNeg && negativeRegex.test(s)) rowNeg = true;
+                    }
+                    if (rowPos) pos++;
+                    else if (rowNeg) neg++;
+                }
+            }
+            return { pos: pos, neg: neg, total: rows.length };
+        }
+
+        // Fungsi untuk memperbarui semua grafik di halaman berdasarkan data di penyimpanan
+        function updateChartsFromStorage() {
+            try {
+                const raw = sessionStorage.getItem('uploadedTableData');
+                if (!raw) return;
+                const payload = JSON.parse(raw);
+                const counts = getPosNegCountsFromPayload(payload);
+
+                if (typeof myPieChart !== 'undefined' && myPieChart && myPieChart.data) {
+                    myPieChart.data.labels = ['Positif','Negatif'];
+                    myPieChart.data.datasets[0].data = [counts.pos, counts.neg];
+                    myPieChart.update();
+                }
+
+                if (typeof myLineChart !== 'undefined' && myLineChart && myLineChart.data) {
+                    myLineChart.data.labels = ['Positif','Negatif'];
+                    myLineChart.data.datasets[0].data = [counts.pos, counts.neg];
+                    if (myLineChart.options && myLineChart.options.scales && myLineChart.options.scales.yAxes) {
+                        const maxVal = Math.max(counts.pos, counts.neg, 1);
+                        myLineChart.options.scales.yAxes[0].ticks.suggestedMax = Math.ceil(maxVal * 1.2);
+                    }
+                    myLineChart.update();
+                }
+            } catch (e) { console.warn('updateChartsFromStorage error', e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () { try { updateChartsFromStorage(); } catch(e){} });
+        window.addEventListener('storage', function (e) { if (e.key === 'uploadedTableData') updateChartsFromStorage(); });
+    </script>
+
+    <script>
+        // consume topbar search on Prediksi page (gunakan prediksi baru)
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                const q = sessionStorage.getItem('topbar_search');
+                const t = sessionStorage.getItem('topbar_search_target');
+                if (q && t === 'prediksi') {
+                    const inp = document.getElementById('sentimentSearchInput'); if (inp) inp.value = q;
+                    setTimeout(function () { try { performSentimentSearch(); } catch (e) {} }, 50);
+                    sessionStorage.removeItem('topbar_search'); sessionStorage.removeItem('topbar_search_target');
+                }
+            } catch (e) { }
+        });
+    </script>
+
+</body>
+
+</html>

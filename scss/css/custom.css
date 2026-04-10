@@ -1,0 +1,829 @@
+/* Gradient background yang lebih menarik */
+#content-wrapper {
+  background: linear-gradient(135deg, #d8e8fb 0%, #e8f4ff 50%, #f0f8ff 100%) !important; 
+  min-height: 100vh;
+}
+
+/* ============ DASHBOARD TITLE STYLING ============ */
+.dashboard-title {
+  position: relative;
+  font-weight: 800 !important;
+  color: #4e73df !important;
+  font-size: 2.75rem !important;
+  letter-spacing: -0.5px;
+  padding: 8px 12px;
+  display: inline-block;
+}
+
+/* Underline effect - always visible */
+.dashboard-title::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 12px;
+  right: 12px;
+  height: 3px;
+  background: linear-gradient(90deg, #4e73df, #36b9cc);
+  border-radius: 2px;
+}
+
+/* Small UI tweaks for sentiment distribution card dengan animasi */
+    .sentiment-summary-box { 
+      background:linear-gradient(135deg, #f0f4ff, #f5f9ff); 
+      padding:12px 16px; 
+      border-radius:10px;
+      border: 1px solid rgba(78,115,223,0.1);
+      transition: all 0.3s ease;
+    }
+    .sentiment-summary-box:hover {
+      background:linear-gradient(135deg, #f5f9ff, #fafcff);
+      box-shadow: 0 2px 8px rgba(78,115,223,0.1);
+    }
+    .sentiment-badge { 
+      font-size:0.85rem; 
+      color:#fff; 
+      font-weight:700; 
+      padding:4px 12px; 
+      border-radius:18px; 
+      display:inline-block;
+      transition: all 0.3s ease;
+    }
+    .sentiment-badge:hover {
+      transform: scale(1.05);
+    }
+    .sentiment-badge.pos { 
+      background: linear-gradient(135deg, #1cc88a, #12a86b);
+      box-shadow: 0 2px 8px rgba(28,200,138,0.3);
+    }
+    .sentiment-badge.neg { 
+      background: linear-gradient(135deg, #e74a3b, #c83b2c);
+      box-shadow: 0 2px 8px rgba(231,74,59,0.3);
+    }
+    /* Combined summary bar above line chart */
+    .dist-summary { 
+      background: linear-gradient(135deg, #f8fafc, #f5f8fd);
+      border-radius: 10px; 
+      padding: 16px 24px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 32px;
+      border: 1px solid rgba(78,115,223,0.1);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .dist-summary:hover {
+      background: linear-gradient(135deg, #f5f8fd, #f0f6ff);
+      border-color: rgba(78,115,223,0.15);
+      box-shadow: 0 4px 12px rgba(78,115,223,0.08);
+    }
+    .percent-pill { 
+      display: inline-block; 
+      padding: 8px 16px; 
+      border-radius: 20px; 
+      font-weight: 700; 
+      font-size: 0.9rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .percent-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .percent-pill.pos { 
+      background: linear-gradient(135deg, rgba(28,200,138,0.12), rgba(28,200,138,0.06)); 
+      color: #1cc88a;
+      border: 1.5px solid rgba(28,200,138,0.25);
+    }
+    .percent-pill.pos:hover {
+      background: linear-gradient(135deg, rgba(28,200,138,0.18), rgba(28,200,138,0.1));
+      box-shadow: 0 4px 12px rgba(28,200,138,0.2);
+    }
+    .percent-pill.neg { 
+      background: linear-gradient(135deg, rgba(231,74,59,0.12), rgba(231,74,59,0.06)); 
+      color: #e74a3b;
+      border: 1.5px solid rgba(231,74,59,0.25);
+    }
+    .percent-pill.neg:hover {
+      background: linear-gradient(135deg, rgba(231,74,59,0.18), rgba(231,74,59,0.1));
+      box-shadow: 0 4px 12px rgba(231,74,59,0.2);
+    }
+    .export-pdf-btn { 
+      background: linear-gradient(135deg, #6f42c1, #5a3699); 
+      border-color:#5a3699; 
+      color:#fff;
+      transition: all 0.3s ease;
+    }
+    .export-pdf-btn:hover {
+      background: linear-gradient(135deg, #5a3699, #4a2d80);
+      box-shadow: 0 4px 12px rgba(111,66,193,0.3);
+      transform: translateY(-2px);
+    }
+    .chart-callout { 
+      color:#fff; 
+      font-weight:700; 
+      font-size:0.85rem;
+    }
+    /* Confusion matrix card styles dengan gradient */
+    .confusion-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .confusion-cell { background:#f8fafc; border-radius:12px; padding:12px 18px; min-height:84px; display:flex; flex-direction:column; align-items:center; justify-content:center; transition: all 0.3s ease; border: 2px solid transparent; }
+    .confusion-cell.positive { background:linear-gradient(135deg, rgba(28,200,138,0.12), rgba(28,200,138,0.05)); border-color: rgba(28,200,138,0.2); }
+    .confusion-cell.negative { background:linear-gradient(135deg, rgba(231,74,59,0.12), rgba(231,74,59,0.05)); border-color: rgba(231,74,59,0.2); }
+    .confusion-cell:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .confusion-num { font-size:1.6rem; font-weight:800; color:#2f4f4f; }
+    .confusion-label { font-size:0.85rem; color:#6c757d; margin-top:4px; }
+    .metrics-row { display:flex; gap:12px; margin-top:14px; }
+    .metric-pill { flex:1; background:linear-gradient(135deg, #f1f5f9, #e8f1f8); border-radius:10px; padding:12px; text-align:center; transition: all 0.3s ease; border: 1px solid rgba(78,115,223,0.1); }
+    .metric-pill:hover { background:linear-gradient(135deg, #e8f1f8, #dfe9f3); box-shadow: 0 2px 8px rgba(78,115,223,0.15); }
+    .metric-pill .metric-value { font-size:1.3rem; font-weight:800; color:#2b6cb0; }
+    .metric-pill .metric-label { font-size:0.85rem; color:#6c757d; }
+    .card .chart-bar { flex:1 1 auto; display:flex; }
+    .card .chart-bar canvas { width:100% !important; height:100% !important; max-height:600px; }
+    
+    /* Card header dengan gradient background */
+    .card-header {
+      background: linear-gradient(135deg, rgba(78,115,223,0.05), rgba(78,115,223,0.02)) !important;
+      border-bottom: 2px solid rgba(223, 129, 78, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .card-header h6 {
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      transition: color 0.3s ease;
+    }
+    
+    .card:hover .card-header {
+      background: linear-gradient(135deg, rgba(78,115,223,0.08), rgba(78,115,223,0.04)) !important;
+      border-bottom-color: rgba(78,115,223,0.15);
+    }
+    
+    /* Make confusion grid fill available vertical space and distribute rows equally */
+    .confusion-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; flex:1 1 auto; grid-auto-rows:1fr; align-items:stretch; }
+    .confusion-grid .confusion-cell { display:flex; flex-direction:column; justify-content:center; align-items:center; padding:24px 18px; border-radius:12px; }
+    /* Make metrics stick to the bottom and be evenly sized */
+    .metrics-row { margin-top:12px; display:flex; gap:12px; align-items:stretch; }
+    .metrics-row .metric-pill { display:flex; flex-direction:column; justify-content:center; align-items:center; padding:14px; }
+    /* Ensure card-body is flex column so grid grows and metrics sit at bottom */
+    .card .card-body { display:flex; flex-direction:column; }
+    .card .card-body > .confusion-grid { margin-bottom:12px; }
+    .metrics-row { margin-top:auto; }
+    /* Force identical card height for the two comparison panels on wide screens */
+    .confusion-card { display:flex; flex-direction:column; }
+    .confusion-card > .card-body { flex:1 1 auto; display:flex; flex-direction:column; }
+    
+    @media (min-width:992px) {
+        .confusion-card { min-height:560px; }
+    }
+    /* Stat card visual refresh (only for the four small cards) */
+    .stat-card { display:flex; align-items:center; gap:12px; }
+    .stat-icon { width:48px; height:48px; border-radius:10px; color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.15rem; box-shadow: 0 2px 6px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease;} 
+    .stat-value { font-size:1.375rem; font-weight:800; line-height:1; }
+    .stat-sub { font-size:0.78rem; color:#6c757d; margin-top:3px; }
+    .stat-pill { display:inline-block; padding:4px 10px; border-radius:999px; font-weight:700; font-size:0.75rem; }
+    /* Color variants with gradients */
+    .stat-icon.primary { background: linear-gradient(135deg,#4e73df,#224abe); }
+    .stat-icon.success { background: linear-gradient(135deg,#1cc88a,#12a86b); }
+    .stat-icon.danger { background: linear-gradient(135deg,#e74a3b,#c83b2c); }
+    .stat-icon.info { background: linear-gradient(135deg,#36b9cc,#2aa2b5); }
+    
+    /* Hover effect untuk stat icons */
+    .stat-icon:hover {
+      transform: scale(1.15) rotate(5deg);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    /* Card hover animation */
+    .card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    
+    .card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      transform: translateY(-2px);
+    }
+    
+    /* Animated background overlay for cards */
+    .card:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.5s;
+      pointer-events: none;
+    }
+    
+    .card:hover:before {
+      left: 100%;
+    }
+    
+    /* subtle right-side chevron for clickable cards - updated color to blue */
+    .clickable-card .card-body:after { content: "\f054"; font-family: 'Font Awesome 5 Free'; font-weight:900; position:absolute; right:18px; top:18px; color: #4e73df; font-size:18px; transition: all 0.3s ease; }
+    .clickable-card:hover .card-body:after { color: #2e59d9; right:14px; }
+    .clickable-card { cursor:pointer; }
+
+    /* Table sentiment badges: larger boxes dengan animasi */
+    .sent-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 18px;
+      min-width: 96px;
+      height: 44px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1.10rem;
+      line-height: 1;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .sent-badge.pos { 
+      background: linear-gradient(135deg, rgba(28,200,138,0.15), rgba(28,200,138,0.08)); 
+      color: #1cc88a;
+      border: 1.5px solid rgba(28,200,138,0.3);
+    }
+    .sent-badge.neg { 
+      background: linear-gradient(135deg, rgba(231,74,59,0.15), rgba(231,74,59,0.08)); 
+      color: #e74a3b;
+      border: 1.5px solid rgba(231,74,59,0.3);
+    }
+    
+    .sent-badge:hover {
+      transform: scale(1.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    
+    .sent-badge.pos:hover { box-shadow: 0 4px 16px rgba(28,200,138,0.25); }
+    .sent-badge.neg:hover { box-shadow: 0 4px 16px rgba(231,74,59,0.25); }
+
+    /* Table styling tweaks untuk uploaded data table dengan hover effects */
+    #uploadedTable { border-collapse: separate; border-spacing: 0; }
+    /* Table header styling: larger, uppercase, subtle accent underline */
+    #uploadedTable thead th {
+      background: transparent;
+      color: #51608a;
+      font-weight: 800;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 18px 18px;
+      vertical-align: middle;
+      transition: all 0.3s ease;
+    }
+    #uploadedTable thead th:hover {
+      color: #2b4770;
+      background: transparent;
+    }
+    #uploadedTable thead th::after {
+      content: '';
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 8px;
+      height: 4px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, rgba(78,115,223,0.14), rgba(108,92,231,0.12));
+      opacity: 0.85;
+    }
+
+    /* Body cells: more breathing room dan softer borders dengan smooth transitions */
+    #uploadedTable tbody td { 
+      vertical-align: middle; 
+      padding: 18px; 
+      color: #495057;
+      transition: all 0.2s ease;
+    }
+    #uploadedTable .table-bordered td, #uploadedTable .table-bordered th { 
+      border-color: rgba(37,55,88,0.06);
+      transition: border-color 0.2s ease;
+    }
+    #uploadedTable tbody tr {
+      transition: all 0.2s ease;
+    }
+    #uploadedTable tbody tr:hover { 
+      background: linear-gradient(90deg, rgba(78,115,223,0.04), rgba(78,115,223,0.02));
+      box-shadow: inset 4px 0 10px rgba(78,115,223,0.1);
+    }
+    #uploadedTable tbody tr:hover td {
+      color: #2f3b4a;
+    }
+
+    /* Make the Sentimen header pop a bit */
+    #uploadedTable thead th:last-child { color: #37517e; text-align:center; font-size:1.05rem; font-weight:900; }
+
+    /* Slightly emphasize the first column label (Komentar) */
+    #uploadedTable thead th:first-child { color: #2b4770; font-size:1.25rem; font-weight:900; }
+
+    /* Small responsive tweak: reduce header underline on small screens */
+    @media (max-width: 768px) {
+      #uploadedTable thead th::after { left: 12px; right: 12px; bottom: 6px; height:3px; }
+    }
+
+    /* Make comment text larger, bolder and easier to read */
+    #uploadedTable tbody td:first-child {
+      font-size: 1.40rem;
+      line-height: 1.6;
+      color: #2f3b4a;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    /* Center the Sentimen column and its badge */
+    #uploadedTable tbody td:last-child {
+      text-align: center;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    #uploadedTable tbody td:last-child .sent-badge {
+      min-width: 96px;
+      text-align: center;
+      /* inline-flex centering applied in .sent-badge */
+    }
+
+    /* Make the Sentimen column wider so it shifts left and is less cramped */
+    #uploadedTable thead th:last-child,
+    #uploadedTable tbody td:last-child {
+      width: 220px;
+      max-width: 260px;
+    }
+
+    @media (max-width: 992px) {
+      #uploadedTable thead th:last-child,
+      #uploadedTable tbody td:last-child { width: 160px; max-width: 200px; }
+    }
+
+    @media (max-width: 768px) {
+      /* slightly smaller on mobile but retain emphasis */
+      #uploadedTable tbody td:first-child { font-size: 1.06rem; font-weight:600; }
+      #uploadedTable tbody td:last-child .sent-badge { min-width: 80px; padding:6px 10px; height:38px; }
+    }
+
+    /* ============ PAGINATION & CONTROLS ============ */
+    .pagination {
+      transition: all 0.3s ease;
+    }
+    
+    .pagination .page-link {
+      border: 1px solid rgba(78,115,223,0.2);
+      color: #4e73df;
+      background: #fff;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      margin: 0 2px;
+      border-radius: 6px;
+    }
+    
+    .pagination .page-link:hover {
+      background: linear-gradient(135deg, #4e73df, #365ace);
+      color: #fff;
+      border-color: #4e73df;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(78,115,223,0.3);
+    }
+    
+    .pagination .page-item.active .page-link {
+      background: linear-gradient(135deg, #4e73df, #365ace);
+      border-color: #365ace;
+      box-shadow: 0 2px 8px rgba(78,115,223,0.2);
+    }
+    
+    /* Form controls styling */
+    .form-control, select.form-control {
+      border: 1px solid rgba(78,115,223,0.15);
+      transition: all 0.3s ease;
+      border-radius: 6px;
+    }
+    
+    .form-control:focus, select.form-control:focus {
+      border-color: #4e73df;
+      box-shadow: 0 0 0 0.2rem rgba(78,115,223,0.25);
+      background-color: #fff;
+    }
+    
+    /* Select dropdown styling */
+    select.form-control {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%234e73df' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 16px 12px;
+      padding-right: 2.5rem;
+      appearance: none;
+    }
+
+    /* ------------------------------------------------------------------
+       Mirror uploadedTable styles untuk pages yang menggunakan #dataTable
+       Ini menjaga UI yang sama tanpa mengubah JS yang target #dataTable.
+       ------------------------------------------------------------------ */
+    
+    #dataTable { border-collapse: separate; border-spacing: 0; }
+    #dataTable thead th {
+      background: linear-gradient(180deg, rgba(81,96,138,0.03), transparent);
+      color: #51608a;
+      font-weight: 800;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 18px 18px;
+      vertical-align: middle;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    #dataTable thead th:hover {
+      color: #2b4770;
+      background: linear-gradient(180deg, rgba(81,96,138,0.08), rgba(81,96,138,0.02));
+    }
+    #dataTable thead th::after {
+      content: '';
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 8px;
+      height: 4px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, rgba(78,115,223,0.14), rgba(108,92,231,0.12));
+      opacity: 0.85;
+    }
+    #dataTable tbody td { 
+      vertical-align: middle; 
+      padding: 18px; 
+      color: #495057;
+      transition: all 0.2s ease;
+    }
+    #dataTable .table-bordered td, #dataTable .table-bordered th { 
+      border-color: rgba(37,55,88,0.06);
+      transition: border-color 0.2s ease;
+    }
+    #dataTable tbody tr {
+      transition: all 0.2s ease;
+    }
+    #dataTable tbody tr:hover { 
+      background: linear-gradient(90deg, rgba(78,115,223,0.04), rgba(78,115,223,0.02));
+      box-shadow: inset 4px 0 10px rgba(78,115,223,0.1);
+    }
+    #dataTable tbody tr:hover td {
+      color: #2f3b4a;
+    }
+    #dataTable thead th:last-child { color: #37517e; text-align:center; font-size:1.05rem; font-weight:900; }
+    #dataTable thead th:first-child { color: #2b4770; font-size:1.25rem; font-weight:900; }
+    #dataTable tbody td:first-child { font-size: 1.40rem; line-height: 1.6; color: #2f3b4a; padding-top: 20px; padding-bottom: 20px; }
+    #dataTable tbody td:last-child { text-align: center; vertical-align: middle; white-space: nowrap; }
+    #dataTable tbody td:last-child .sent-badge { min-width: 96px; text-align: center; }
+
+    /* Ensure the full badge styling juga applies ketika table adalah #dataTable */
+    #dataTable .sent-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 18px;
+      min-width: 96px;
+      height: 44px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1.10rem;
+      line-height: 1;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    #dataTable .sent-badge.pos { 
+      background: linear-gradient(135deg, rgba(28,200,138,0.15), rgba(28,200,138,0.08)); 
+      color: #1cc88a;
+      border: 1.5px solid rgba(28,200,138,0.3);
+    }
+    #dataTable .sent-badge.neg { 
+      background: linear-gradient(135deg, rgba(231,74,59,0.15), rgba(231,74,59,0.08)); 
+      color: #e74a3b;
+      border: 1.5px solid rgba(231,74,59,0.3);
+    }
+    #dataTable .sent-badge:hover {
+      transform: scale(1.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    #dataTable .sent-badge.pos:hover { box-shadow: 0 4px 16px rgba(28,200,138,0.25); }
+    #dataTable .sent-badge.neg:hover { box-shadow: 0 4px 16px rgba(231,74,59,0.25); }
+
+    @media (max-width: 992px) {
+      #dataTable thead th:last-child,
+      #dataTable tbody td:last-child { width: 160px; max-width: 200px; }
+    }
+
+    @media (max-width: 768px) {
+      #dataTable tbody td:first-child { font-size: 1.06rem; font-weight:600; }
+      #dataTable tbody td:last-child .sent-badge { min-width: 80px; padding:6px 10px; height:38px; }
+    }
+
+    /* ============ UPLOAD BUTTON STYLING ============ */
+    #uploadBtnLabel {
+      position: relative;
+      padding: 10px 22px !important;
+      font-size: 0.95rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.3px;
+      border: none !important;
+      border-radius: 6px !important;
+      background: linear-gradient(135deg, #4e73df 0%, #365ace 100%) !important;
+      box-shadow: 0 4px 12px rgba(78,115,223,0.25) !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: #fff !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+    
+    /* Hover state - subtle elevation */
+    #uploadBtnLabel:hover {
+      background: linear-gradient(135deg, #365ace 0%, #2a4fa8 100%) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(78,115,223,0.3) !important;
+    }
+    
+    /* Active state */
+    #uploadBtnLabel:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(78,115,223,0.2) !important;
+    }
+    
+    /* Icon styling */
+    #uploadBtnLabel i {
+      font-size: 0.9rem;
+      transition: transform 0.3s ease;
+    }
+    
+    #uploadBtnLabel:hover i {
+      transform: translateY(-2px);
+    }
+    
+    /* Focus state untuk accessibility */
+    #uploadBtnLabel:focus {
+      outline: none;
+      box-shadow: 0 6px 20px rgba(78,115,223,0.3), 0 0 0 3px rgba(78,115,223,0.15) !important;
+    }
+    
+    /* Responsive untuk mobile */
+    @media (max-width: 576px) {
+      #uploadBtnLabel {
+        padding: 8px 16px !important;
+        font-size: 0.85rem !important;
+        gap: 6px;
+      }
+      #uploadBtnLabel i {
+        font-size: 0.8rem !important;
+      }
+    }
+
+    /* Keep old fancy class for backward compatibility if needed */
+    .upload-btn-fancy {
+      position: relative;
+      overflow: hidden;
+      padding: 10px 24px !important;
+      font-size: 0.95rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.5px;
+      border: none !important;
+      border-radius: 8px !important;
+      background: linear-gradient(135deg, #4e73df, #365ace) !important;
+      box-shadow: 0 4px 15px rgba(78,115,223,0.3) !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff !important;
+    }
+    
+    /* Decorative shimmer effect */
+    .upload-btn-fancy::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+      pointer-events: none;
+    }
+    
+    .upload-btn-fancy:hover::before {
+      left: 100%;
+    }
+    
+    /* Icon animation */
+    .upload-btn-fancy i {
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    
+    .upload-btn-fancy .upload-text {
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    
+    /* Hover state */
+    .upload-btn-fancy:hover {
+      background: linear-gradient(135deg, #365ace, #2a4fa8) !important;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(78,115,223,0.4) !important;
+    }
+    
+    .upload-btn-fancy:hover i {
+      animation: uploadIconBounce 0.6s ease;
+    }
+    
+    .upload-btn-fancy:hover .upload-text {
+      letter-spacing: 1px;
+    }
+    
+    /* Icon bounce animation */
+    @keyframes uploadIconBounce {
+      0%, 100% { transform: translateY(0); }
+      25% { transform: translateY(-4px); }
+      50% { transform: translateY(0); }
+      75% { transform: translateY(-2px); }
+    }
+    
+    /* Active state */
+    .upload-btn-fancy:active {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 10px rgba(78,115,223,0.3) !important;
+    }
+    
+    /* Focus state untuk accessibility */
+    .upload-btn-fancy:focus {
+      outline: none;
+      box-shadow: 0 8px 25px rgba(78,115,223,0.4), 0 0 0 3px rgba(78,115,223,0.2) !important;
+    }
+    
+    /* Responsive untuk mobile */
+    @media (max-width: 576px) {
+      .upload-btn-fancy {
+        padding: 8px 16px !important;
+        font-size: 0.85rem !important;
+        gap: 6px;
+      }
+      .upload-btn-fancy i {
+        font-size: 0.75rem !important;
+      }
+    }
+   /* ================= CONFUSION MATRIX MODERN ================= */
+
+.card.confusion-card {
+    border-radius: 20px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+
+.card.confusion-card .card-body {
+    padding: 40px;
+}
+
+/* Subtitle */
+.confusion-subtitle {
+    font-size: 0.78rem;
+    color: #9095A8;
+    margin-bottom: 10px;
+}
+
+/* MATRIX LAYOUT */
+.matrix-wrap {
+    display: grid;
+    grid-template-columns: 60px 1fr;   /* lebih lebar kiri */
+    grid-template-rows: 40px 1fr;      /* header lebih tinggi */
+    gap: 10px;
+    width: 100%;                       /* paksa full */
+}
+
+.matrix-col-header {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pred-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #9095A8;
+    margin-bottom: 4px;
+}
+
+.col-labels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    gap: 6px;
+}
+
+.col-label {
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.col-label.pos { color: #12B886; }
+.col-label.neg { color: #FA5252; }
+
+.matrix-row-header {
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row-title {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #9095A8;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+}
+
+/* CELLS */
+.matrix-cells {
+    grid-column: 2;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 6px;
+}
+
+.matrix-cell {
+    border-radius: 16px;
+    padding: 20px 15px;   /* lebih besar */
+    min-height: 100px;    /* tinggi kotak */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.matrix-cells {
+    width: 100%;
+}
+.col-xl-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.cell-tp, .cell-tn { background: #EBFBEE; }
+.cell-fp, .cell-fn { background: #FFF5F5; }
+
+.cell-num {
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.cell-tp .cell-num,
+.cell-tn .cell-num { color: #12B886; }
+
+.cell-fp .cell-num,
+.cell-fn .cell-num { color: #FA5252; }
+
+.cell-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    opacity: 0.7;
+}
+
+/* METRICS */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.metric-cell {
+    background: #F5F7FF;
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-align: center;
+}
+
+.metric-val {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #3B6EF8;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.metric-label {
+    font-size: 0.72rem;
+    color: #9095A8;
+}
+

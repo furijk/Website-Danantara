@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Tables</title>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+        /* Hide DataTables search box and columns text */
+        .dataTables_filter { display: none !important; }
+        /* Style DataTables bottom controls to match tables.html */
+        .dataTables_length { margin-right: 1.5rem; }
+        .dataTables_length label { margin-bottom: 0; display: flex; align-items: center; gap: 8px; font-size: 0.875rem; color: #6c757d; }
+        .dataTables_length select { width: auto !important; display: inline-block !important; }
+        .dataTables_info { font-size: 0.875rem; color: #6c757d; padding-top: 0 !important; }
+    </style>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Page Title - Centered -->
+                    <div class="d-flex align-items-center justify-content-center w-100">
+                        <h1 class="h3 mb-0 text-gray-800 dashboard-title">Negatif</h1>
+                    </div>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto"></ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-flex align-items-center justify-content-between mb-4" style="position: relative;">
+                        <a href="index.html" class="btn btn-secondary shadow-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-arrow-left fa-sm"></i> Kembali
+                        </a>
+                    </div>
+                
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Uploaded Data (Negatif)</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Belum ada data yang di-upload. Silakan upload file di halaman Dashboard.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mt-3">
+                                <small id="uploadedFileName" class="text-muted d-block">&nbsp;</small>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Apply pending topbar search when this page loads -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                const search = sessionStorage.getItem('topbar_search');
+                const target = sessionStorage.getItem('topbar_search_target');
+                if (search && target === 'negatif') {
+                    const input = document.querySelector('#tableSearchInput');
+                    if (input) { input.value = search; const ev = new Event('input', { bubbles: true }); input.dispatchEvent(ev); }
+                    // If no page-level input exists, perform the search directly after the page loads
+                    if (!input) { setTimeout(function () { try { performTableSearch(search); } catch (e) {} }, 50); }
+                    sessionStorage.removeItem('topbar_search');
+                    sessionStorage.removeItem('topbar_search_target');
+                }
+            } catch (e) { /* ignore storage errors */ }
+        });
+    </script>
+
+    <!-- Page level custom scripts -->
+    <!-- <script src="js/demo/datatables-demo.js"></script> -->
+
+    <!-- Load uploaded data from sessionStorage and populate the DataTable with NEGATIVE rows only (same UI as positif.html) -->
+    <script>
+        // Fungsi untuk melarikan (escape) karakter HTML agar aman ditampilkan
+        function escapeHtml(text) {
+            return String(text === null || text === undefined ? '' : text)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        // Fungsi untuk mendeteksi indeks kolom sentimen positif berdasarkan header dan baris data
+        function detectPositiveColumnIndex(header, rows) {
+            for (let i = 0; i < header.length; i++) {
+                const h = String(header[i] || '').toLowerCase();
+                if (/sentim|sentimen|sentiment|label|kelas|predik/i.test(h)) return i;
+            }
+            const scores = new Array(header.length).fill(0);
+            function isPos(v) {
+                if (v === null || v === undefined) return false;
+                const s = String(v).toLowerCase();
+                return /^(positif|positive|pos|p|1|true)$/i.test(s) || s.includes('positif') || s.includes('positive');
+            }
+            for (const r of rows) {
+                for (let i = 0; i < header.length; i++) if (isPos(r[i])) scores[i]++;
+            }
+            let best = -1, bestScore = 0;
+            for (let i = 0; i < scores.length; i++) { if (scores[i] > bestScore) { best = i; bestScore = scores[i]; } }
+            if (bestScore > 0) return best;
+            return -1;
+        }
+
+        // Fungsi untuk menghitung skor sentimen baris berdasarkan kata kunci positif/negatif
+        function sentimentScoreRow(row, header) {
+            const candidates = ['text','teks','isi','tweet','message','review','komentar','comment','isi_pesan','judul'];
+            let text = '';
+            for (let i = 0; i < header.length; i++) {
+                const h = String(header[i] || '').toLowerCase();
+                if (candidates.some(c => h.includes(c))) { text = String(row[i] || ''); break; }
+            }
+            if (!text) text = (row || []).join(' ');
+            const s = String(text).toLowerCase();
+
+            const positiveWords = ['bagus','baik','senang','suka','puas','terbaik','mantap','bagus sekali','cinta','positif','recommend','love','great','excellent','amazing','happy'];
+            const negativeWords = ['buruk','jelek','sedih','benci','tidak suka','gagal','buruk sekali','negatif','neg','hate','bad','terrible','poor','sad','angry'];
+            let score = 0;
+            for (const w of positiveWords) { if (s.indexOf(w) !== -1) score++; }
+            for (const w of negativeWords) { if (s.indexOf(w) !== -1) score--; }
+            return score;
+        }
+
+        // Fungsi untuk mendeteksi kolom label negatif secara cerdas berdasarkan konten
+        function detectLabelNegativeColumn(header, rows) {
+            if (!header || !header.length) return -1;
+            const headersLower = header.map(h => String(h || '').toLowerCase());
+
+            function isLabelValue(v) {
+                if (v === null || v === undefined) return false;
+                const s = String(v).trim().toLowerCase();
+                if (!s) return false;
+                if (/^(positif|positive|pos|p|1|true|negatif|negative|neg|n|0|false)$/i.test(s)) return true;
+                if (s.includes('positif') || s.includes('positive') || s.includes('negatif') || s.includes('negative')) return true;
+                return false;
+            }
+
+            const headerCandidates = [];
+            for (let i = 0; i < headersLower.length; i++) {
+                if (/\b(sentim|sentimen|sentiment|negatif|negative|neg|label|kelas|status|result|class|kategori|hasil|pelabel|pelabelan)\b/i.test(headersLower[i])) headerCandidates.push(i);
+            }
+
+            function columnLabelMatchRate(idx) {
+                let match = 0, total = 0;
+                for (const r of rows) {
+                    const v = r[idx];
+                    if (v !== null && v !== undefined && String(v).trim() !== '') {
+                        total++; if (isLabelValue(v)) match++; }
+                }
+                return total === 0 ? 0 : match / total;
+            }
+
+            let bestIdx = -1, bestRate = 0;
+            for (const idx of headerCandidates) {
+                const rate = columnLabelMatchRate(idx);
+                if (rate > bestRate) { bestRate = rate; bestIdx = idx; }
+            }
+            if (bestRate >= 0.25) return bestIdx;
+
+            // cadangan: pindai semua kolom untuk nilai yang mirip label
+            for (let i = 0; i < header.length; i++) {
+                const rate = columnLabelMatchRate(i);
+                if (rate > bestRate) { bestRate = rate; bestIdx = i; }
+            }
+            if (bestRate >= 0.25) return bestIdx;
+            return -1;
+        }
+
+        // Fungsi untuk mengecek apakah baris mengandung kata negatif di mana saja
+        function containsNegativeWordAnywhere(row) {
+            const s = (row || []).join(' ').toLowerCase();
+            const negativeWords = ['buruk','jelek','sedih','benci','tidak suka','gagal','buruk sekali','negatif','neg','hate','bad','terrible','poor','sad','angry'];
+            for (const w of negativeWords) if (s.indexOf(w) !== -1) return true;
+            return false;
+        }
+
+        // Fungsi untuk menentukan apakah suatu baris adalah negatif berdasarkan label atau skor
+        function isNegativeRow(row, header, allRows) {
+            // pengecekan label
+            const labelIdx = detectLabelNegativeColumn(header, allRows || []);
+            const negativeRegex = /^\s*(0|false|no|n|negatif|negative|neg)\s*$/i;
+            if (labelIdx !== -1) {
+                const v = row[labelIdx] == null ? '' : String(row[labelIdx]).trim();
+                if (negativeRegex.test(v)) return true;
+            }
+            // pengecekan skor
+            const score = sentimentScoreRow(row, header);
+            if (score < 0) return true;
+            // cadangan: skor netral tetapi mengandung kata negatif eksplisit
+            if (score === 0 && containsNegativeWordAnywhere(row)) return true;
+            return false;
+        }
+
+        // Fungsi utama untuk merender tabel data negatif
+        function renderNegatifDataTable() {
+            try {
+                const raw = sessionStorage.getItem('uploadedTableData');
+                const fileEl = document.getElementById('uploadedFileName');
+                const countEl = document.getElementById('negatifCount');
+                if (!raw) {
+                    if (fileEl) fileEl.textContent = '';
+                    if (countEl) countEl.textContent = '';
+                    if ($.fn.DataTable.isDataTable('#dataTable')) {
+                        try { $('#dataTable').DataTable().clear().destroy(); } catch (e) { }
+                    }
+                    const thead = document.querySelector('#dataTable thead');
+                    const tbody = document.querySelector('#dataTable tbody');
+                    thead.innerHTML = '<tr><th>&nbsp;</th></tr>';
+                    tbody.innerHTML = '<tr><td>Belum ada data yang di-upload. Silakan upload file di halaman Dashboard.</td></tr>';
+                    
+                    // Inisialisasi DataTable kosong tanpa fitur pencarian
+                    if (!$.fn.DataTable.isDataTable('#dataTable')) {
+                        $('#dataTable').DataTable({
+                            searching: false,
+                            ordering: false,
+                            info: false,
+                            paging: false,
+                            language: {
+                                zeroRecords: 'Belum ada data yang di-upload. Silakan upload file di halaman Dashboard.'
+                            }
+                        });
+                    }
+                    return false;
+                }
+                const payload = JSON.parse(raw);
+                if (!payload || !payload.header || !payload.rows) return false;
+
+                const header = payload.header;
+                const rows = payload.rows;
+                if (fileEl) fileEl.textContent = payload.fileName || '';
+
+                const thead = document.querySelector('#dataTable thead');
+                const tfoot = document.querySelector('#dataTable tfoot');
+                const tbody = document.querySelector('#dataTable tbody');
+
+                const headRow = document.createElement('tr');
+                const footRow = document.createElement('tr');
+                for (const h of header) {
+                    const th = document.createElement('th'); th.textContent = String(h);
+                    headRow.appendChild(th);
+                    const thf = document.createElement('th'); thf.textContent = String(h);
+                    footRow.appendChild(thf);
+                }
+                thead.innerHTML = ''; thead.appendChild(headRow);
+                if (tfoot) { tfoot.innerHTML = ''; tfoot.appendChild(footRow); }
+
+                // Mode label-saja: lebih mengutamakan kolom label/sentimen eksplisit dan hanya tampilkan baris negatif
+                const negativeRows = [];
+                const labelIdx = detectLabelNegativeColumn(header, rows);
+                const labelInfoEl = document.getElementById('labelInfo');
+                if (labelIdx !== -1 && labelInfoEl) labelInfoEl.textContent = 'Label column: ' + String(header[labelIdx]);
+                if (labelIdx === -1) {
+                    if (labelInfoEl) labelInfoEl.textContent = 'Label column: (tidak ditemukan)';
+                    if (countEl) countEl.textContent = 'Negatif: 0 / ' + rows.length + ' (kolom label tidak ditemukan)';
+                    tbody.innerHTML = '<tr><td>Kolom label tidak ditemukan. Pastikan file memiliki kolom label yang menunjukkan negatif (contoh: "negatif", "neg", atau nilai 0).</td></tr>';
+                    if ($.fn.DataTable.isDataTable('#dataTable')) {
+                        try { $('#dataTable').DataTable().clear().destroy(); } catch (e) { }
+                    }
+                    return false;
+                }
+                const negativeRegex = /^\s*(0|false|no|n|negatif|negative|neg)\s*$/i;
+                for (const r of rows) {
+                    const v = r[labelIdx] == null ? '' : String(r[labelIdx]);
+                    if (negativeRegex.test(v.trim())) negativeRows.push(r);
+                }
+
+                // Log debug untuk pemecahan masalah
+                try { console.debug('renderNegatifDataTable: label=', header[labelIdx], 'negatives=', negativeRows.length, 'total=', rows.length); } catch (e) {}
+
+                if (countEl) {
+                    countEl.textContent = 'Negatif: ' + negativeRows.length + ' / ' + rows.length;
+                }
+
+                // membangun isi (body) tabel
+                let bodyHtml = '';
+                if (negativeRows.length === 0) {
+                    bodyHtml = '<tr><td>Tidak ada baris dengan sentimen negatif yang terdeteksi.</td></tr>';
+                } else {
+                    for (const r of negativeRows) {
+                        bodyHtml += '<tr>';
+                        for (let i = 0; i < header.length; i++) {
+                            const cell = i < r.length ? escapeHtml(r[i]) : '';
+                            // jika ini adalah kolom label/sentimen, render sebagai badge bergaya
+                            if (i === labelIdx) {
+                                const rawVal = i < r.length ? String(r[i]) : '';
+                                const low = String(rawVal || '').trim().toLowerCase();
+                                const isPos = /^(positif|positive|pos|p|1|true)$/i.test(low) || low.includes('positif') || low.includes('positive');
+                                const badgeClass = isPos ? 'pos' : 'neg';
+                                bodyHtml += '<td><span class="sent-badge ' + badgeClass + '">' + escapeHtml(rawVal) + '</span></td>';
+                            } else {
+                                bodyHtml += '<td>' + cell + '</td>';
+                            }
+                        }
+                        bodyHtml += '</tr>';
+                    }
+                }
+                tbody.innerHTML = bodyHtml;
+
+                if ($.fn.DataTable.isDataTable('#dataTable')) {
+                    try { $('#dataTable').DataTable().clear().destroy(); } catch (e) { /* abaikan */ }
+                }
+                $('#dataTable').DataTable({
+                    dom: 'rt<"d-flex align-items-center justify-content-between mt-2" <"d-flex align-items-center"li> p>',
+                    ordering: false,
+                    pageLength: 10,
+                    lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    pagingType: 'simple_numbers',
+                    searching: false,
+                    language: {
+                        lengthMenu: 'Tampilkan _MENU_',
+                        info: 'Menampilkan _START_–_END_ dari _TOTAL_',
+                        infoEmpty: 'Menampilkan 0–0 dari 0',
+                        zeroRecords: 'Tidak ada data',
+                        paginate: { previous: 'Previous', next: 'Next' },
+                        search: 'Cari:'
+                    }
+                });
+                return true;
+            } catch (e) {
+                console.warn('renderNegatifDataTable error', e);
+                return false;
+            }
+        }
+
+        // Fungsi untuk melakukan pencarian pada tabel
+        function performTableSearch(q) {
+            try {
+                if ($.fn.DataTable.isDataTable('#dataTable')) {
+                    const dt = $('#dataTable').DataTable(); dt.search(q).draw();
+                } else {
+                    const tbody = document.querySelector('#dataTable tbody');
+                    if (!tbody) return;
+                    const rows = tbody.querySelectorAll('tr');
+                    const qq = String(q).toLowerCase();
+                    rows.forEach(function (r) {
+                        const text = (r.textContent || '').toLowerCase(); r.style.display = text.includes(qq) ? '' : 'none';
+                    });
+                }
+            } catch (e) { }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () { try { renderNegatifDataTable(); } catch (e){} });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                const q = sessionStorage.getItem('topbar_search');
+                const t = sessionStorage.getItem('topbar_search_target');
+                if (q && t === 'negatif') {
+                    setTimeout(function () { try { performTableSearch(q); } catch (e) {} }, 50);
+                    sessionStorage.removeItem('topbar_search'); sessionStorage.removeItem('topbar_search_target');
+                }
+            } catch (e) {}
+        });
+
+        window.addEventListener('storage', function (e) {
+            if (e.key === 'uploadedTableData' || e.key === 'uploadedTableData_update') {
+                renderNegatifDataTable();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

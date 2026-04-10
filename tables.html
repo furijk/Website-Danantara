@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Danantara - Tabel Data</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <style>
+        /* Hide DataTables search box and columns text if they exist */
+        .dataTables_filter, .dataTables_info { display: none !important; }
+        #uploadedTable thead th { color: transparent !important; user-select: none !important; }
+        /* When table has data, show headers */
+        #uploadedTable.has-data thead th { color: inherit !important; user-select: auto !important; }
+    </style>
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Page Title - Centered -->
+                    <div class="d-flex align-items-center justify-content-center w-100">
+                        <h1 class="h3 mb-0 text-gray-800 dashboard-title">Tabel Data</h1>
+                    </div>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-flex align-items-center justify-content-between mb-4" style="position: relative;">
+                        <a href="index.html" class="btn btn-secondary shadow-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-arrow-left fa-sm"></i> Kembali
+                        </a>
+                    </div>
+
+                    <!-- Uploaded Data Table -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3 d-flex align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Data Terunggah</h6>
+                                    <div class="d-flex align-items-center">
+                                        <small id="fileName" class="text-muted"></small>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="uploadedTable" width="100%" cellspacing="0">
+                                            <thead id="uploadedTableHead">
+                                                <tr><th>&nbsp;</th></tr>
+                                            </thead>
+                                            <tbody id="uploadedTableBody">
+                                                <tr><td>Belum ada data yang di-upload. Silakan upload file di halaman Dashboard.</td></tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="d-flex align-items-center justify-content-between mt-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="pageSizeSelect" class="mr-2 small text-muted mb-0">Tampilkan</label>
+                                                <select id="pageSizeSelect" class="form-control form-control-sm mr-3" style="width:auto">
+                                                    <option value="5">5</option>
+                                                    <option value="10" selected>10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                </select>
+                                                <div id="paginationInfo" class="text-muted small"></div>
+                                            </div>
+                                            <nav>
+                                                <ul class="pagination mb-0" id="paginationControls"></ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        // Fungsi pembantu: pengurai CSV yang tangguh untuk menangani bidang yang dikutip
+        function csvToArray(strData, strDelimiter) {
+            strDelimiter = (strDelimiter || ",");
+            const objPattern = new RegExp(
+                (
+                    "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+                    "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+                    "([^\"\\" + strDelimiter + "\\r\\n]*))"
+                ),
+                "gi"
+            );
+            const arrData = [[]];
+            let arrMatches = null;
+            while ((arrMatches = objPattern.exec(strData))) {
+                const strMatchedDelimiter = arrMatches[1];
+                if (strMatchedDelimiter.length && strMatchedDelimiter !== strDelimiter) {
+                    arrData.push([]);
+                }
+                let strMatchedValue;
+                if (arrMatches[2]) {
+                    strMatchedValue = arrMatches[2].replace(/""/g, '"');
+                } else {
+                    strMatchedValue = arrMatches[3];
+                }
+                arrData[arrData.length - 1].push(strMatchedValue);
+            }
+            return arrData;
+        }
+
+        let pageSize = 10;
+        let tableHeader = [];
+        let tableRows = [];
+        let currentPage = 1;
+
+        // Fungsi untuk menampilkan data pada halaman tertentu (paginasi)
+        function showPage(page) {
+            const totalRows = tableRows.length;
+            const tableEl = document.getElementById('uploadedTable');
+            if (tableEl) {
+                if (totalRows > 0) {
+                    tableEl.classList.add('has-data');
+                } else {
+                    tableEl.classList.remove('has-data');
+                }
+            }
+            const totalPages = pageSize === 0 ? 1 : Math.max(1, Math.ceil(totalRows / pageSize));
+            if (page < 1) page = 1;
+            if (page > totalPages) page = totalPages;
+            currentPage = page;
+
+            const theadEl = document.getElementById('uploadedTableHead');
+            if (theadEl) {
+                if (tableHeader && tableHeader.length) {
+                    theadEl.innerHTML = `<tr>${tableHeader.map(h => `<th>${escapeHtml(h)}</th>`).join('')}</tr>`;
+                }
+            }
+
+            // mendeteksi indeks kolom sentimen/label (jika ada) untuk merender badge
+            let sentimentIdx = -1;
+            if (tableHeader && tableHeader.length) {
+                const headersLower = tableHeader.map(h => String(h).toLowerCase());
+                const candidates = ['sentimen','sentiment','label','klasifikasi','hasil','prediksi','prediction','result','class','kategori','category'];
+                for (const term of candidates) {
+                    const idx = headersLower.findIndex(h => h.includes(term));
+                    if (idx !== -1) { sentimentIdx = idx; break; }
+                }
+            }
+
+            let start = pageSize === 0 ? 0 : (currentPage - 1) * pageSize;
+            let end = pageSize === 0 ? totalRows : Math.min(start + pageSize, totalRows);
+
+            const tbodyEl = document.getElementById('uploadedTableBody');
+            if (tbodyEl) {
+                const pageRows = tableRows.slice(start, end);
+                
+                const posRegex = /^(1|true|yes|y|pos|positif|positive)$/i;
+                const negRegex = /^(0|false|no|n|negatif|negative|neg)$/i;
+
+                // membangun baris dan membungkus nilai kolom sentimen dalam span badge
+                const rowsHtml = pageRows.map(r => {
+                    const cells = [];
+                    for (let i = 0; i < (tableHeader.length || 0); i++) {
+                        const raw = i < r.length ? r[i] : '';
+                        const escaped = escapeHtml(raw);
+                        
+                        if (i === sentimentIdx) {
+                            const s = String(raw || '').trim();
+                            const sLow = s.toLowerCase();
+                            
+                            if (posRegex.test(sLow) || sLow.includes('posit')) {
+                                cells.push(`<td><span class="sent-badge pos">${escaped}</span></td>`);
+                            } else if (negRegex.test(sLow) || sLow.includes('negat')) {
+                                cells.push(`<td><span class="sent-badge neg">${escaped}</span></td>`);
+                            } else {
+                                cells.push(`<td>${escaped}</td>`);
+                            }
+                        } else {
+                            cells.push(`<td>${escaped}</td>`);
+                        }
+                    }
+                    return '<tr>' + cells.join('') + '</tr>';
+                }).join('');
+                tbodyEl.innerHTML = rowsHtml;
+            }
+
+            const paginationInfoEl = document.getElementById('paginationInfo');
+            if (paginationInfoEl) {
+                paginationInfoEl.textContent = totalRows === 0 ? 'Tidak ada data' : 
+                    (pageSize === 0 ? `Menampilkan 1–${totalRows} dari ${totalRows}` : 
+                    `Menampilkan ${start + 1}–${Math.min(end, totalRows)} dari ${totalRows}`);
+            }
+
+            updatePaginationControls(totalPages);
+        }
+
+        // Fungsi untuk memperbarui elemen kontrol paginasi
+        function updatePaginationControls(totalPages) {
+            const container = document.getElementById('paginationControls');
+            container.innerHTML = '';
+            if (pageSize === 0 || totalPages <= 1) return;
+
+            const prev = document.createElement('li');
+            prev.className = 'page-item ' + (currentPage === 1 ? 'disabled' : '');
+            prev.innerHTML = `<a class="page-link" href="#">Previous</a>`;
+            prev.onclick = (e) => { e.preventDefault(); if (currentPage > 1) showPage(currentPage - 1); };
+            container.appendChild(prev);
+
+            for (let p = 1; p <= totalPages; p++) {
+                if (totalPages > 7 && Math.abs(p - currentPage) > 2 && p !== 1 && p !== totalPages) {
+                    if (p === 2 || p === totalPages - 1) {
+                        const dots = document.createElement('li');
+                        dots.className = 'page-item disabled';
+                        dots.innerHTML = `<span class="page-link">...</span>`;
+                        container.appendChild(dots);
+                    }
+                    continue;
+                }
+                const li = document.createElement('li');
+                li.className = 'page-item ' + (p === currentPage ? 'active' : '');
+                li.innerHTML = `<a class="page-link" href="#">${p}</a>`;
+                li.onclick = (e) => { e.preventDefault(); showPage(p); };
+                container.appendChild(li);
+            }
+
+            const next = document.createElement('li');
+            next.className = 'page-item ' + (currentPage === totalPages ? 'disabled' : '');
+            next.innerHTML = `<a class="page-link" href="#">Next</a>`;
+            next.onclick = (e) => { e.preventDefault(); if (currentPage < totalPages) showPage(currentPage + 1); };
+            container.appendChild(next);
+        }
+
+        // Fungsi untuk melarikan (escape) karakter HTML agar aman ditampilkan
+        function escapeHtml(text) {
+            return String(text || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+        }
+
+        // Fungsi untuk memuat data yang tersimpan dari sessionStorage
+        function loadSavedDataFromStorage() {
+            try {
+                const raw = sessionStorage.getItem('uploadedTableData');
+                if (!raw) return;
+                const obj = JSON.parse(raw);
+                if (obj && obj.header && obj.rows) {
+                    tableHeader = obj.header;
+                    tableRows = obj.rows;
+                    const fileNameEl = document.getElementById('fileName');
+                    if (fileNameEl) fileNameEl.textContent = obj.fileName || 'Data tersimpan';
+                    showPage(1);
+                }
+            } catch (err) { console.warn('Failed to load data:', err); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSavedDataFromStorage();
+            const sel = document.getElementById('pageSizeSelect');
+            if (sel) sel.onchange = (e) => { pageSize = parseInt(e.target.value); showPage(1); };
+        });
+
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'uploadedTableData') loadSavedDataFromStorage();
+        });
+    </script>
+
+</body>
+
+</html>
